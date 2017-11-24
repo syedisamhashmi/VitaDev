@@ -158,7 +158,25 @@ namespace graphics
     {
         ((uint32_t *)fb[cur_fb].base)[x + y*fb[cur_fb].pitch] = color;
     }
-    void draw_texture_scale_loaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY, double newHeightScale, double newWidthScale)
+    
+    
+    //Loaded Texture Functions
+    void draw_texture_loaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY)
+    {
+        for(unsigned int y = 0; y < texture->header.height; y++)
+        {
+            for(unsigned int x = 0 ; x < texture->header.width; x++)
+            {
+                uint32_t pixelcolor =  colors::RGBA832(texture->pixels[y][x].red, texture->pixels[y][x].green, texture->pixels[y][x].blue, texture->pixels[y][x].alpha);
+                
+                game::Position pos = checkBounds(posX,posY, x, y);
+                
+                if(texture->pixels[y][x].alpha != 0)
+                    graphics::draw_pixel(pos.x+x, pos.y+y, pixelcolor);
+            }
+        }
+    }
+    void draw_texture_loaded_scale(filesystem::Texture* texture, unsigned int posX, unsigned int posY, double newHeightScale, double newWidthScale)
     {
         int newWidth = (int)newWidthScale*texture->header.width;
         int newHeight = (int)newHeightScale*texture->header.height;
@@ -200,22 +218,66 @@ namespace graphics
         delete [] temp;
         //delete temp;
     }
-    void draw_texture_loaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY)
+    void draw_texture_loaded_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum)
     {
-        for(unsigned int y = 0; y < texture->header.height; y++)
+        if(pieceNum > texture->header.states)
         {
-            for(unsigned int x = 0 ; x < texture->header.width; x++)
+            pieceNum = (int)(pieceNum % texture->header.states);
+        }
+        unsigned int startX = (pieceNum * (widthPerPiece));
+        //unsigned int startY = pieceNum * heightPerPiece;
+        
+        filesystem::pixel temp;
+        for(unsigned int y = 0; y < heightPerPiece; y++)
+        {
+            for(unsigned int x = 0 ; x < widthPerPiece; x++)
             {
-                uint32_t pixelcolor =  colors::RGBA832(texture->pixels[y][x].red, texture->pixels[y][x].green, texture->pixels[y][x].blue, texture->pixels[y][x].alpha);
+                temp = texture->pixels[y][startX + x];
+                uint32_t pixelcolor =  colors::RGBA832(temp.red, temp.green, temp.blue, temp.alpha);
                 
                 game::Position pos = checkBounds(posX,posY, x, y);
-                
-                if(texture->pixels[y][x].alpha != 0)
+                if(temp.alpha != 0)
                     graphics::draw_pixel(pos.x+x, pos.y+y, pixelcolor);
             }
         }
     }
+    void draw_texture_loaded_scale_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum)
+    {
+        
+        filesystem::Texture* part = new filesystem::Texture(heightPerPiece,widthPerPiece, texture->header.states);
+        //part->format(heightPerPiece, widthPerPiece);
+        
+        if(pieceNum > part->header.states)
+        {
+            pieceNum = (int)(pieceNum % part->header.states);
+        }
+        
+        unsigned int startX = (pieceNum * (widthPerPiece));
+        
+        for(unsigned int y = 0; y < heightPerPiece; y++)
+        {
+            for(unsigned int x = 0 ; x < widthPerPiece; x++)
+            {
+                filesystem::pixel temp = texture->pixels[y][startX + x];
+                uint32_t pixelcolor =  colors::RGBA832(temp.red, temp.green, temp.blue, temp.alpha);
+                part->pixels[y][x] = temp;
+            }
+        }
+        
+        
+        draw_texture_loaded_scale(part, posX, posY, newHeightScale, newWidthScale);
+        
+        for(unsigned int i = 0; i < heightPerPiece; i++) //Stop memory leak.
+        {
+            delete [] part->pixels[i];
+        } // Delete part pixels after printing, and subarray.
+        delete [] part->pixels;
+        //delete part;
+        
+    }
     
+    
+    //File Texture Functions
     void draw_texture_file(std::string filename, unsigned int posX, unsigned int posY)
     {
         SceUID fileUID = sceIoOpen(filename.c_str(), SCE_O_RDONLY, 0777); //Open file
@@ -257,106 +319,7 @@ namespace graphics
         sceIoClose(fileUID);
         
     }
-    
-    void draw_preloaded_texture(filesystem::Texture* texture, unsigned int posX, unsigned int posY)
-    {
-        if(texture->preloaded != filesystem::NOT_PRELOADED)
-        {
-            const unsigned char* animation_to_draw;
-            if(texture->preloaded == filesystem::IDLE_ANIMATION)
-            {
-                animation_to_draw = preloaded::idle;
-            }
-            if(texture->preloaded == filesystem::RIGHT_RUN_ANIMATION)
-            {
-                animation_to_draw = preloaded::rightrun;
-            }
-            utils::printsf(250, 100, colors::WHITE32, "%d", animation_to_draw[0]);
-            
-            
-            
-            for(unsigned int y = 0; y < texture->header.height; y++)
-            {
-                for(unsigned int x = 0 ; x < texture->header.width; x++)
-                {
-                    unsigned long int allcolors;
-                    memcpy(&allcolors, &(animation_to_draw[(12 + (y* texture->header.width) * 4) + (x*4)]), 4);
-                 
-                    game::Position pos = checkBounds(posX,posY, x, y);
-                    if(((allcolors >> 24) & 0xFF) != 0)
-                        graphics::draw_pixel(pos.x+x, pos.y+y, allcolors);
-                }
-                
-            }
-            
-            
-            
-            
-        }
-    }
-    
-    void draw_texture_part_loaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum)
-    {
-        if(pieceNum > texture->header.states)
-        {
-            pieceNum = (int)(pieceNum % texture->header.states);
-        }
-        unsigned int startX = (pieceNum * (widthPerPiece));
-        //unsigned int startY = pieceNum * heightPerPiece;
-        
-        filesystem::pixel temp;
-        for(unsigned int y = 0; y < heightPerPiece; y++)
-        {
-            for(unsigned int x = 0 ; x < widthPerPiece; x++)
-            {
-                temp = texture->pixels[y][startX + x];
-                uint32_t pixelcolor =  colors::RGBA832(temp.red, temp.green, temp.blue, temp.alpha);
-                
-                game::Position pos = checkBounds(posX,posY, x, y);
-                if(temp.alpha != 0)
-                    graphics::draw_pixel(pos.x+x, pos.y+y, pixelcolor);
-            }
-        }
-    }
-    
-    
-    void draw_texture_part_loaded_scale(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum)
-    {
-        
-        filesystem::Texture* part = new filesystem::Texture(heightPerPiece,widthPerPiece, texture->header.states);
-        //part->format(heightPerPiece, widthPerPiece);
-        
-        if(pieceNum > part->header.states)
-        {
-            pieceNum = (int)(pieceNum % part->header.states);
-        }
-        
-        unsigned int startX = (pieceNum * (widthPerPiece));
-        
-        for(unsigned int y = 0; y < heightPerPiece; y++)
-        {
-            for(unsigned int x = 0 ; x < widthPerPiece; x++)
-            {
-                filesystem::pixel temp = texture->pixels[y][startX + x];
-                uint32_t pixelcolor =  colors::RGBA832(temp.red, temp.green, temp.blue, temp.alpha);
-                part->pixels[y][x] = temp;
-            }
-        }
-        
-        
-        draw_texture_scale_loaded(part, posX, posY, newHeightScale, newWidthScale);
-        
-        for(unsigned int i = 0; i < heightPerPiece; i++) //Stop memory leak.
-        {
-            delete [] part->pixels[i];
-        } // Delete part pixels after printing, and subarray.
-        delete [] part->pixels;
-        //delete part;
-        
-    }
-    
-    
-     void draw_texture_part_file(std::string filename, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum)
+    void draw_texture_file_part(std::string filename, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum)
     {
         
         SceUID fileUID = sceIoOpen(filename.c_str(), SCE_O_RDONLY, 0777); //Open file
@@ -369,6 +332,14 @@ namespace graphics
         unsigned int width;
         sceIoRead(fileUID, &width, 4);
         
+        unsigned int states;
+        sceIoRead(fileUID, &states, 4);
+        
+        
+        if(pieceNum > states)
+        {
+            pieceNum = (int)(pieceNum % states);
+        }
         
         unsigned int byteToStart = (pieceNum*widthPerPiece)*4;
         
@@ -404,8 +375,7 @@ namespace graphics
         
         sceIoClose(fileUID);
     }
-
-    void draw_texture_part_file_scale(std::string filename, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum)
+    void draw_texture_file_scale_part(std::string filename, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum)
     {
         SceUID fileUID = sceIoOpen(filename.c_str(), SCE_O_RDONLY, 0777); //Open file
         
@@ -440,10 +410,82 @@ namespace graphics
             }
             sceIoLseek(fileUID, (tempHeader->width - widthPerPiece)*4 , SCE_SEEK_CUR); //Go to next height of frame
         }
-        draw_texture_scale_loaded(part, posX, posY, newHeightScale, newWidthScale);
+        draw_texture_loaded_scale(part, posX, posY, newHeightScale, newWidthScale);
         sceIoClose(fileUID);
         
     }
+    
+    
+    //Preloaded Texture Functions
+    void draw_texture_preloaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY)
+    {
+        if(texture->preloaded != filesystem::NOT_PRELOADED)
+        {
+            const unsigned char* animation_to_draw;
+            if(texture->preloaded == filesystem::IDLE_ANIMATION)
+            {
+                animation_to_draw = preloaded::idle;
+            }
+            if(texture->preloaded == filesystem::RIGHT_RUN_ANIMATION)
+            {
+                animation_to_draw = preloaded::rightrun;
+            }
+            
+            for(unsigned int y = 0; y < texture->header.height; y++)
+            {
+                for(unsigned int x = 0 ; x < texture->header.width; x++)
+                {
+                    unsigned long int allcolors;
+                    memcpy(&allcolors, &(animation_to_draw[(12 + (y* texture->header.width) * 4) + (x*4)]), 4);
+                    
+                    game::Position pos = checkBounds(posX,posY, x, y);
+                    if(((allcolors >> 24) & 0xFF) != 0)
+                        graphics::draw_pixel(pos.x+x, pos.y+y, allcolors);
+                }
+            }
+            
+        }
+    }
+    void draw_texture_preloaded_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum)
+    {
+        if(pieceNum > texture->header.states)
+        {
+            pieceNum = (int)(pieceNum % texture->header.states);
+        }
+        if(texture->preloaded != filesystem::NOT_PRELOADED)
+        {
+            const unsigned char* animation_to_draw;
+            if(texture->preloaded == filesystem::IDLE_ANIMATION)
+            {
+                animation_to_draw = preloaded::idle;
+            }
+            if(texture->preloaded == filesystem::RIGHT_RUN_ANIMATION)
+            {
+                animation_to_draw = preloaded::rightrun;
+            }
+            
+            for(unsigned int y = 0; y < heightPerPiece; y++)
+            {
+                for(unsigned int x = 0 ; x < widthPerPiece; x++)
+                {
+                    unsigned long int allcolors;
+                    memcpy(&allcolors, &(animation_to_draw[(12 + (pieceNum*widthPerPiece * 4) + ((y *(texture->header.width - widthPerPiece))*4 )
+                                                            + (y* widthPerPiece) * 4) + (x*4)]), 4);
+                    
+                    game::Position pos = checkBounds(posX,posY, x, y);
+                    if(((allcolors >> 24) & 0xFF) != 0)
+                        graphics::draw_pixel(pos.x+x, pos.y+y, allcolors);
+                }
+            }
+            
+        }
+    }
+    
+    
+    
+    
+    
+    
     
     
     game::Position checkBounds(int posX, int posY, unsigned int x, unsigned int y)

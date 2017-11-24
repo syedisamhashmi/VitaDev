@@ -42,18 +42,24 @@ int main(int argc, char *argv[])
         io::getio();    //Vita2d and Selfmade
         
         
-        graphics::draw_preloaded_texture(rightrun,150,150);
-        graphics::draw_preloaded_texture(idle,200,120);
+        graphics::draw_texture_preloaded(rightrun,150,150);
+        //graphics::draw_texture_preloaded(idle,200,120);
         
         
       //  graphics::draw_texture_part_loaded_scale(rightrun, 200 + 20*(x), 350, game::PLAYER_HEIGHT, game::PLAYER_WIDTH, 2, 2, (int) x);
         //Works.
         
-        utils::printsf(250, 300, colors::WHITE32, "width |%u|", rightrun->header.width);
-        utils::printsf(250, 330, colors::WHITE32, "height |%u|", rightrun->header.height);
-        utils::printsf(250, 360, colors::WHITE32, "states |%u|", rightrun->header.states);
+        //utils::printsf(250, 300, colors::WHITE32, "width |%u|", rightrun->header.width);
+        //utils::printsf(250, 330, colors::WHITE32, "height |%u|", rightrun->header.height);
+        //utils::printsf(250, 360, colors::WHITE32, "states |%u|", rightrun->header.states);
         
-        x+=.4;
+        
+        
+        graphics::draw_texture_preloaded_part(rightrun,150 + (10*x) ,200,game::PLAYER_HEIGHT,game::PLAYER_WIDTH,(int)x);
+        
+        
+        
+        x+=.2;
 
         //if(x >= 10)
         //    x = 0;

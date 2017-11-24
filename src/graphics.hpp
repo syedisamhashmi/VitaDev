@@ -38,26 +38,30 @@ namespace graphics
     
     
     //Selfmade (can not interact with Vita2d)
-    
     void setUp();
-    
     void initializeFramebuffers(); //graphics::init(); //Vita2d
     void freeFramebuffers(); //Release memory of framebuffers.
     void swapFramebuffers(); //Swap framebuffers (selfmade)
     void clearScreen(); //Set framebuffer.base to white (wholescreen)
     void colorScreen(uint16_t color); //Specify color using RBH or defined color::
     void draw_pixel(uint32_t x, uint32_t y, uint32_t color);
-    void draw_texture_scale_loaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY, double newHeightScale, double newWidthScale); //Use filesystem::openfile to obtain a Texture*
-    void draw_texture_loaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY); //Drawing without scaling
-    void draw_texture_file(std::string filename, unsigned int posX, unsigned int posY);
-        // Draw texture straight from file.
-    void draw_texture_part_loaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum); //Draw a piece of a large texture from a loaded file.
     
-    void draw_texture_part_loaded_scale(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum);
     
-    void draw_texture_part_file(std::string filename, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum); //Draw a piece of a large texture from a file.
-    void draw_texture_part_file_scale(std::string filename, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum); //Draw a piece of a large texture from a file scaled.
-    void draw_preloaded_texture(filesystem::Texture* texture, unsigned int posX, unsigned int posY);
+    //Use filesystem::openfile or filesystem::preload to obtain a Texture*
+    
+    //Loaded Texture Functions
+    void draw_texture_loaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY); //Drawing a texture
+    void draw_texture_loaded_scale(filesystem::Texture* texture, unsigned int posX, unsigned int posY, double newHeightScale, double newWidthScale); //Drawing a texture, scaled.
+    void draw_texture_loaded_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum); //Draw a piece of a large texture from a loaded file.
+    void draw_texture_loaded_scale_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum); //Draw a part of a loaded texture and scale it.
+    //File Texture Functions
+    void draw_texture_file(std::string filename, unsigned int posX, unsigned int posY); // Draw texture straight from file.
+    void draw_texture_file_part(std::string filename, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum); //Draw a piece of a large texture from a file.
+    void draw_texture_file_scale_part(std::string filename, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum); //Draw a piece of a large texture from a file scaled.
+    //Preloaded texture Functions
+    void draw_texture_preloaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY); //Draw a preloaded texture.
+    void draw_texture_preloaded_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum); //Draw a piece of a preloaded texture.
+    
     game::Position checkBounds(int posX, int posY, unsigned int x, unsigned int y);
 }
 
