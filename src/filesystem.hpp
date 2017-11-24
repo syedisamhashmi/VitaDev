@@ -17,6 +17,7 @@
 //#include "graphics.hpp"
 namespace filesystem
 {
+    typedef enum {NOT_PRELOADED, IDLE_ANIMATION,  RIGHT_RUN_ANIMATION} preloaded_animations;
     class Header
     {
         public:
@@ -42,16 +43,22 @@ namespace filesystem
     class Texture
     {
         public:
+            filesystem::preloaded_animations preloaded;
             filesystem::Header header;
             pixel** pixels;
             void format(unsigned int height, unsigned int width, unsigned int states);
             Texture(unsigned int height, unsigned int width, unsigned int states);
     };
+   
+    
+    
+    
     Texture* loadFile(std::string filename);
     
     filesystem::Texture* loadFile_multiThread(std::string filename);
     int read(SceSize args, void* argp);
     filesystem::Header* readHeader(SceUID file);
+    filesystem::Texture* preload(preloaded_animations animation);
 }
 
 

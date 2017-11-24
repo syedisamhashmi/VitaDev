@@ -12,7 +12,11 @@
 #include "filesystem.hpp"
 #include "io.hpp"
 
-#include "game.hpp" 
+#include "game.hpp"
+
+
+#include "preloaded.hpp"
+
 
 int main(int argc, char *argv[])
 {
@@ -24,40 +28,30 @@ int main(int argc, char *argv[])
     graphics::setUp(); //Turn off system control;
     
     graphics::initializeFramebuffers(); //Selfmade
-    filesystem::Texture* idle = filesystem::loadFile(idleFile);
-    filesystem::Texture* rightrun = filesystem::loadFile(rightRunFile);
-
+    
+    filesystem::Texture* rightrun = filesystem::preload(filesystem::RIGHT_RUN_ANIMATION);
+    filesystem::Texture* idle = filesystem::preload(filesystem::IDLE_ANIMATION);
     
 
     double x = 0;
     bool exit = false;
     while(!exit)
     {
-        graphics::colorScreen(colors::BLACK16);
-        utils::printsf(700, 0, colors::WHITE32, "Frame: %d", framecount);
+        graphics::colorScreen(colors::BLACK16); //Flush screen BLACK.
+        utils::printsf(700, 0, colors::WHITE32, "Frame: %d", framecount); //Print out frame number.
         io::getio();    //Vita2d and Selfmade
         
         
-        graphics::draw_texture_scale_loaded(idle, x, 50, 1, 1);
-        //Works.
-        graphics::draw_texture_scale_loaded(idle, x, 100, 2, 2);
-        //Works.
-
-        graphics::draw_texture_part_loaded(rightrun, 200, 200, game::PLAYER_HEIGHT, game::PLAYER_WIDTH, (int)x);
-        //Works.
-
-        //graphics::draw_texture_file(rightRunFile, 200, 200);
-        //Works.
-       
-        //graphics::draw_texture_part_file(rightRunFile, 200, 200,43,35, (int) x);
+        graphics::draw_preloaded_texture(rightrun,150,150);
+        graphics::draw_preloaded_texture(idle,200,120);
+        
+        
+      //  graphics::draw_texture_part_loaded_scale(rightrun, 200 + 20*(x), 350, game::PLAYER_HEIGHT, game::PLAYER_WIDTH, 2, 2, (int) x);
         //Works.
         
-        //graphics::draw_texture_part_file_scale(rightRunFile, 200, 200,43, 35, 2, 2, (int) x);
-        
-        graphics::draw_texture_part_loaded_scale(rightrun, 200 + 20*(x), 350, game::PLAYER_HEIGHT, game::PLAYER_WIDTH, 2, 2, (int) x);
-        //Works.
-        
-        utils::printsf(250, 300, colors::WHITE32, "%f", x);
+        utils::printsf(250, 300, colors::WHITE32, "width |%u|", rightrun->header.width);
+        utils::printsf(250, 330, colors::WHITE32, "height |%u|", rightrun->header.height);
+        utils::printsf(250, 360, colors::WHITE32, "states |%u|", rightrun->header.states);
         
         x+=.4;
 

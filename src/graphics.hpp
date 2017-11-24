@@ -57,7 +57,7 @@ namespace graphics
     
     void draw_texture_part_file(std::string filename, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum); //Draw a piece of a large texture from a file.
     void draw_texture_part_file_scale(std::string filename, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum); //Draw a piece of a large texture from a file scaled.
-    
+    void draw_preloaded_texture(filesystem::Texture* texture, unsigned int posX, unsigned int posY);
     game::Position checkBounds(int posX, int posY, unsigned int x, unsigned int y);
 }
 

@@ -2,7 +2,7 @@
 #ifndef PRELOADED_H
 #define PRELOADED_H
 
-namespace font
+namespace preloaded
 {
     const unsigned char idle[] __attribute((aligned(4))) =
     "\x30\x00\x00\x00\x18\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00"

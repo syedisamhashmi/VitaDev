@@ -20,6 +20,7 @@
 #include "colors.hpp"
 #include "utils.hpp"
 #include "graphics.hpp"
+#include "preloaded.hpp"
 namespace filesystem
 {
     Texture::Texture(unsigned int height, unsigned int width, unsigned int states)
@@ -136,4 +137,44 @@ namespace filesystem
     }
     
 
+    filesystem::Texture* preload(preloaded_animations animation)
+    {
+        filesystem::Texture* temp = new Texture(0,0,0);
+        temp->preloaded = filesystem::NOT_PRELOADED;
+        if(animation != filesystem::NOT_PRELOADED)
+        {
+            temp->preloaded = animation;
+        }
+        
+        if(temp->preloaded != filesystem::NOT_PRELOADED)
+        {
+            if(temp->preloaded == filesystem::IDLE_ANIMATION)
+            {
+                unsigned int height = preloaded::idle[0];
+                unsigned int width = preloaded::idle[4];
+                unsigned char states = preloaded::idle[8];
+                temp->header.height = height;
+                temp->header.width = width;
+                temp->header.states = states;
+            }
+            if(temp->preloaded == filesystem::RIGHT_RUN_ANIMATION)
+            {
+                
+                unsigned int height = 0;
+                memcpy(&height, &(preloaded::rightrun[0]), 4);
+                unsigned int width = 0;
+                memcpy(&width, &(preloaded::rightrun[4]), 4);
+                unsigned int states = 0;
+                memcpy(&states, &preloaded::rightrun[8], 4);
+                temp->header.height = height;
+                temp->header.width = width;
+                temp->header.states = states;
+            }
+            
+        }
+        
+        return temp;
+    }
+    
+    
 }

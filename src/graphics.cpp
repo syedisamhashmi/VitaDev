@@ -16,6 +16,7 @@
 #include "utils.hpp"
 #include "filesystem.hpp"
 #include "colors.hpp"
+#include "preloaded.hpp"
 namespace graphics
 {
     //Packaged Vita2d calls
@@ -255,6 +256,43 @@ namespace graphics
         
         sceIoClose(fileUID);
         
+    }
+    
+    void draw_preloaded_texture(filesystem::Texture* texture, unsigned int posX, unsigned int posY)
+    {
+        if(texture->preloaded != filesystem::NOT_PRELOADED)
+        {
+            const unsigned char* animation_to_draw;
+            if(texture->preloaded == filesystem::IDLE_ANIMATION)
+            {
+                animation_to_draw = preloaded::idle;
+            }
+            if(texture->preloaded == filesystem::RIGHT_RUN_ANIMATION)
+            {
+                animation_to_draw = preloaded::rightrun;
+            }
+            utils::printsf(250, 100, colors::WHITE32, "%d", animation_to_draw[0]);
+            
+            
+            
+            for(unsigned int y = 0; y < texture->header.height; y++)
+            {
+                for(unsigned int x = 0 ; x < texture->header.width; x++)
+                {
+                    unsigned long int allcolors;
+                    memcpy(&allcolors, &(animation_to_draw[(12 + (y* texture->header.width) * 4) + (x*4)]), 4);
+                 
+                    game::Position pos = checkBounds(posX,posY, x, y);
+                    if(((allcolors >> 24) & 0xFF) != 0)
+                        graphics::draw_pixel(pos.x+x, pos.y+y, allcolors);
+                }
+                
+            }
+            
+            
+            
+            
+        }
     }
     
     void draw_texture_part_loaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum)
