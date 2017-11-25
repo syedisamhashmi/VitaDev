@@ -32,6 +32,7 @@ int main(int argc, char *argv[])
     filesystem::Texture* rightrun = filesystem::preload(filesystem::RIGHT_RUN_ANIMATION);
     filesystem::Texture* idle = filesystem::preload(filesystem::IDLE_ANIMATION);
     
+    game::player = game::Entity();
 
     double x = 0;
     bool exit = false;
@@ -42,6 +43,7 @@ int main(int argc, char *argv[])
         io::getio();    //Vita2d and Selfmade
         
         
+        
         graphics::draw_texture_preloaded(rightrun,150,150);
         
         //graphics::draw_texture_preloaded(idle,200,120);
@@ -50,14 +52,10 @@ int main(int argc, char *argv[])
       //  graphics::draw_texture_part_loaded_scale(rightrun, 200 + 20*(x), 350, game::PLAYER_HEIGHT, game::PLAYER_WIDTH, 2, 2, (int) x);
         //Works.
         
-        //utils::printsf(250, 300, colors::WHITE32, "width |%u|", rightrun->header.width);
-        //utils::printsf(250, 330, colors::WHITE32, "height |%u|", rightrun->header.height);
-        //utils::printsf(250, 360, colors::WHITE32, "states |%u|", rightrun->header.states);
+      
         
-        
-        
-        graphics::draw_texture_preloaded_scale_part(rightrun,150 + (15*x) ,200,game::PLAYER_HEIGHT,game::PLAYER_WIDTH,2,2,(int)x);
-        
+        graphics::draw_texture_preloaded_scale_part(rightrun, game::player.position.x , game::player.position.y, game::PLAYER_HEIGHT, game::PLAYER_WIDTH,2,2,(int)x);
+        game::player.position.x += 15;
         
         
         x+=.4;

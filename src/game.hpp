@@ -15,6 +15,7 @@ namespace game
     extern unsigned int PLAYER_WIDTH;
     typedef enum  {PAUSED, UNPAUSED} gamestate;
     extern gamestate state;
+    
     class Position
     {
         public:
@@ -31,6 +32,8 @@ namespace game
             Entity();
             Entity(int x, int y);
     };
+    
+    extern Entity player;
     
     class Camera
     {

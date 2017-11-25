@@ -487,12 +487,8 @@ namespace graphics
         {
             pieceNum = (int)(pieceNum % texture->header.states);
         }
-        filesystem::Texture part = filesystem::Texture(heightPerPiece, widthPerPiece, texture->header.states);
-        filesystem::pixel** temp = new filesystem::pixel*[heightPerPiece];
-        for(unsigned int i = 0; i < heightPerPiece; i++)
-        {
-            temp[i] = new filesystem::pixel[widthPerPiece];
-        }
+        filesystem::Texture* part = new filesystem::Texture(heightPerPiece, widthPerPiece, texture->header.states);
+       
         
         if(texture->preloaded != filesystem::NOT_PRELOADED)
         {
@@ -518,20 +514,20 @@ namespace graphics
                                                                  ((allcolors >> 8) & 0xFF),
                                                                  ((allcolors >> 16) & 0xFF),
                                                                  ((allcolors >> 24) & 0xFF)) ;
-                    temp[y][x] = tempix;
+                    part->pixels[y][x] = tempix;
                    // graphics::draw_pixel(pos.x+x, pos.y+y, allcolors);
                 }
             }
-            part.pixels = temp;
             
             
-            draw_texture_loaded_scale(&part, posX, posY, newHeightScale, newWidthScale);
+            
+            draw_texture_loaded_scale(part, posX, posY, newHeightScale, newWidthScale);
            
             for(unsigned int i = 0; i < heightPerPiece; i++) //Stop memory leak.
             {
-                delete [] temp[i];
+                delete [] part->pixels[i];
             } // Delete temp pixels after printing, and subarray.
-            delete [] temp;
+            delete [] part->pixels;
             
             
         }

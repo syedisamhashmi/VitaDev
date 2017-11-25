@@ -14,6 +14,7 @@ namespace game
 {
     unsigned int PLAYER_HEIGHT = 43;
     unsigned int PLAYER_WIDTH = 35;
+    Entity player;
     gamestate state;
     Entity::Entity()
     {
