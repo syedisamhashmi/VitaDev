@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
         
         
         graphics::draw_texture_preloaded(rightrun,150,150);
+        
         //graphics::draw_texture_preloaded(idle,200,120);
         
         
@@ -55,11 +56,11 @@ int main(int argc, char *argv[])
         
         
         
-        graphics::draw_texture_preloaded_part(rightrun,150 + (10*x) ,200,game::PLAYER_HEIGHT,game::PLAYER_WIDTH,(int)x);
+        graphics::draw_texture_preloaded_scale_part(rightrun,150 + (15*x) ,200,game::PLAYER_HEIGHT,game::PLAYER_WIDTH,2,2,(int)x);
         
         
         
-        x+=.2;
+        x+=.4;
 
         //if(x >= 10)
         //    x = 0;

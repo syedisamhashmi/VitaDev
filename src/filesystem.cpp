@@ -23,6 +23,22 @@
 #include "preloaded.hpp"
 namespace filesystem
 {
+    
+    pixel::pixel(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha)
+    {
+        this->red = red;
+        this->green = green;
+        this->blue = blue;
+        this->alpha = alpha;
+    }
+    pixel::pixel()
+    {
+        this->red = 0;
+        this->green = 0;
+        this->blue = 0;
+        this->alpha = 0;
+    }
+    
     Texture::Texture(unsigned int height, unsigned int width, unsigned int states)
     {
         this->format(height, width, states);

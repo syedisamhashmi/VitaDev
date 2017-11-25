@@ -481,7 +481,61 @@ namespace graphics
         }
     }
     
-    
+    void draw_texture_preloaded_scale_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum)
+    {
+        if(pieceNum > texture->header.states)
+        {
+            pieceNum = (int)(pieceNum % texture->header.states);
+        }
+        filesystem::Texture part = filesystem::Texture(heightPerPiece, widthPerPiece, texture->header.states);
+        filesystem::pixel** temp = new filesystem::pixel*[heightPerPiece];
+        for(unsigned int i = 0; i < heightPerPiece; i++)
+        {
+            temp[i] = new filesystem::pixel[widthPerPiece];
+        }
+        
+        if(texture->preloaded != filesystem::NOT_PRELOADED)
+        {
+            const unsigned char* animation_to_draw;
+            if(texture->preloaded == filesystem::IDLE_ANIMATION)
+            {
+                animation_to_draw = preloaded::idle;
+            }
+            if(texture->preloaded == filesystem::RIGHT_RUN_ANIMATION)
+            {
+                animation_to_draw = preloaded::rightrun;
+            }
+            
+            for(unsigned int y = 0; y < heightPerPiece; y++)
+            {
+                for(unsigned int x = 0 ; x < widthPerPiece; x++)
+                {
+                    unsigned long int allcolors;
+                    memcpy(&allcolors, &(animation_to_draw[(12 + (pieceNum*widthPerPiece * 4) + ((y *(texture->header.width - widthPerPiece))*4 )
+                                                            + (y* widthPerPiece) * 4) + (x*4)]), 4);
+                    
+                    filesystem::pixel tempix = filesystem::pixel(((allcolors >> 0) & 0xFF),
+                                                                 ((allcolors >> 8) & 0xFF),
+                                                                 ((allcolors >> 16) & 0xFF),
+                                                                 ((allcolors >> 24) & 0xFF)) ;
+                    temp[y][x] = tempix;
+                   // graphics::draw_pixel(pos.x+x, pos.y+y, allcolors);
+                }
+            }
+            part.pixels = temp;
+            
+            
+            draw_texture_loaded_scale(&part, posX, posY, newHeightScale, newWidthScale);
+           
+            for(unsigned int i = 0; i < heightPerPiece; i++) //Stop memory leak.
+            {
+                delete [] temp[i];
+            } // Delete temp pixels after printing, and subarray.
+            delete [] temp;
+            
+            
+        }
+    }
     
     
     
