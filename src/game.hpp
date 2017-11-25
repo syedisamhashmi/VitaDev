@@ -6,7 +6,8 @@
 #include <psp2/gxm.h>
 #include <psp2/kernel/sysmem.h>
 #include <vita2d.h>
-
+#include <psp2/touch.h>
+#include <psp2/ctrl.h>
 
 
 namespace game
@@ -15,6 +16,11 @@ namespace game
     extern unsigned int PLAYER_WIDTH;
     typedef enum  {PAUSED, UNPAUSED} gamestate;
     extern gamestate state;
+    
+    extern signed char lx; //Left analog X
+    extern signed char ly; //Left analog Y
+    extern signed char rx; //Right analog X
+    extern signed char ry; //Right analog Y
     
     class Position
     {
@@ -52,6 +58,7 @@ namespace game
     class Game;
     
     
+    void checkInput(SceCtrlData pad);
     
     
     

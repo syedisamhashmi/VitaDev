@@ -544,11 +544,14 @@ namespace graphics
         //Check bounds on screen to stop crash.
         if(posX + x > graphics::SCREEN_W || posX > graphics::SCREEN_W)
             posX %= SCREEN_W;
-        if(posX + x < 0 || posX < 0)
-            posX = graphics::SCREEN_W;
-        if(posY + y > graphics::SCREEN_H || posY > graphics::SCREEN_H)
+        else if(posX + x < 0 || posX < 0)
+        {
+            posX = -posX;
+            posX %= graphics::SCREEN_W;
+        }
+        else if(posY + y > graphics::SCREEN_H || posY > graphics::SCREEN_H)
             posY %= SCREEN_H;
-        if(posY + y < 0 || posY < 0)
+        else if(posY + y < 0 || posY < 0)
             posY %= graphics::SCREEN_H;
         
         temp.x = posX;
