@@ -32,8 +32,14 @@ namespace game
             Entity();
             Entity(int x, int y);
     };
+    class Player : public Entity
+    {
+        public:
+            unsigned int health;
+            unsigned int missiles;
+    };
     
-    extern Entity player;
+    extern Player player;
     
     class Camera
     {
