@@ -29,8 +29,7 @@ int main(int argc, char *argv[])
     
     graphics::initializeFramebuffers(); //Selfmade
     
-    filesystem::Texture* rightrun = filesystem::preload(filesystem::RIGHT_RUN_ANIMATION);
-    filesystem::Texture* idle = filesystem::preload(filesystem::IDLE_ANIMATION);
+    
     
     game::player = game::Player();
 
@@ -43,8 +42,9 @@ int main(int argc, char *argv[])
         io::getio();    //Vita2d and Selfmade //Read Input
         game::checkInput(io::pad); //Interpret Input
         
+        game::drawPlayer();
         
-        graphics::draw_texture_preloaded(rightrun,150,150);
+        //graphics::draw_texture_preloaded(rightrun,150,150);
         
         //graphics::draw_texture_preloaded(idle,200,120);
         
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
         
       
         
-        graphics::draw_texture_preloaded_scale_part(rightrun, game::player.position.x , game::player.position.y, game::PLAYER_HEIGHT, game::PLAYER_WIDTH,2,2,(int)x);
+       
         utils::printsf(10, 20, colors::WHITE32, "pos x: %d, y: %d", game::player.position.x, game::player.position.y); //Print out frame number.
         utils::printsf(10, 50, colors::WHITE32, "lx x: %d,", io::pad.lx); //Print out frame number.
         

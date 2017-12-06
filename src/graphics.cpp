@@ -501,6 +501,10 @@ namespace graphics
             {
                 animation_to_draw = preloaded::rightrun;
             }
+            if(texture->preloaded == filesystem::LEFT_RUN_ANIMATION)
+            {
+                animation_to_draw = preloaded::leftrun;
+            }
             
             for(unsigned int y = 0; y < heightPerPiece; y++)
             {

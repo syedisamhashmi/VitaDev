@@ -16,6 +16,10 @@ namespace utils
     {
         return val < 0 ? -val : val;
     }
+    double abs(double val)
+    {
+        return val < 0 ? -val : val;
+    }
     void printc(int x, int y, uint32_t color, char c)
     {
         

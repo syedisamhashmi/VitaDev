@@ -23,7 +23,7 @@
 #include "preloaded.hpp"
 namespace filesystem
 {
-    
+   
     pixel::pixel(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha)
     {
         this->red = red;
@@ -124,7 +124,7 @@ namespace filesystem
             sceDisplayWaitVblankStart();
         }
         
-//sceKernelExitDeleteThread(1);
+        //sceKernelExitDeleteThread(1);
         return 1;
     }
     filesystem::Header::Header(unsigned int height, unsigned int width, unsigned int states)
@@ -152,7 +152,7 @@ namespace filesystem
         return returnVal;
     }
     
-
+    
     filesystem::Texture* preload(preloaded_animations animation)
     {
         filesystem::Texture* temp = new Texture(0,0,0);
@@ -173,7 +173,7 @@ namespace filesystem
                 temp->header.width = width;
                 temp->header.states = states;
             }
-            if(temp->preloaded == filesystem::RIGHT_RUN_ANIMATION)
+            else if(temp->preloaded == filesystem::RIGHT_RUN_ANIMATION)
             {
                 
                 unsigned int height = 0;
@@ -182,6 +182,19 @@ namespace filesystem
                 memcpy(&width, &(preloaded::rightrun[4]), 4);
                 unsigned int states = 0;
                 memcpy(&states, &preloaded::rightrun[8], 4);
+                temp->header.height = height;
+                temp->header.width = width;
+                temp->header.states = states;
+            }
+            else if(temp->preloaded == filesystem::LEFT_RUN_ANIMATION)
+            {
+                
+                unsigned int height = 0;
+                memcpy(&height, &(preloaded::leftrun[0]), 4);
+                unsigned int width = 0;
+                memcpy(&width, &(preloaded::leftrun[4]), 4);
+                unsigned int states = 0;
+                memcpy(&states, &preloaded::leftrun[8], 4);
                 temp->header.height = height;
                 temp->header.width = width;
                 temp->header.states = states;

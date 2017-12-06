@@ -17,7 +17,11 @@
 //#include "graphics.hpp"
 namespace filesystem
 {
-    typedef enum {NOT_PRELOADED, IDLE_ANIMATION,  RIGHT_RUN_ANIMATION} preloaded_animations;
+    typedef enum {NOT_PRELOADED, IDLE_ANIMATION,  RIGHT_RUN_ANIMATION, LEFT_RUN_ANIMATION} preloaded_animations;
+    
+    
+    
+    
     class Header
     {
         public:
@@ -52,7 +56,6 @@ namespace filesystem
             Texture(unsigned int height, unsigned int width, unsigned int states);
     };
    
-    
     
     
     Texture* loadFile(std::string filename);
