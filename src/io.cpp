@@ -19,6 +19,7 @@ namespace io
     SceTouchData touch;
     void getio()
     {
+        
         sceCtrlPeekBufferPositive(0, &pad, 1);
     }
 }

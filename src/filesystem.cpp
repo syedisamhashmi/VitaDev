@@ -23,7 +23,7 @@
 #include "preloaded.hpp"
 namespace filesystem
 {
-   
+    
     pixel::pixel(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha)
     {
         this->red = red;

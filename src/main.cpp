@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     std::string rightRunFile = "ux0:/test/rightrun.rgba";
     
     graphics::enableTouchControl(); //Vita2d and Selfmade
-    graphics::setUp(); //Turn off system control;
+    graphics::setUp(); //Turn off system control of screen off and timeout; // TODO
     
     graphics::initializeFramebuffers(); //Selfmade
     
