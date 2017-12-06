@@ -35,7 +35,7 @@ int main(int argc, const char * argv[])
             {
                 cout << "\"" << endl << "\"" ;
             }
-            printf("\\x%2x", (unsigned char)buffer[x]);
+            printf("\\x%02x", (unsigned char)buffer[x]);
         
             
         }
