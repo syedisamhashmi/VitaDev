@@ -1,5 +1,5 @@
-# **_VitaDev_**
-===============
+**_VitaDev_**
+=============
 
 ## Read Please
 #### I've seen that a couple of other people that aren't me have viewed this. That's great! Please, if you have **_any_** experience in developing for this target, **please** send me a message, I'm looking for advice and help and  I am open to suggestions. Thank you!
@@ -10,7 +10,7 @@
 #### I am open to all advice.
 
 
-## Compile Instructions
+Compile Instructions
 ====================
 #### CMakeLists.txt file is attached.
 #### Ensure that your vita is unlocked. For help with setting up a development environment, read more [here](https://vitasdk.org). For unlocking the vita, read more [here](https://henkaku.xyz). For the API, read [here](https://docs.vitasdk.org).
@@ -18,12 +18,12 @@
 #### You may then compile the program using ``` make```.
 #### Using an FTP client, transfer the _.vpk_ file over.
 
-## Assets
+Assets
 ======
 #### The assets seen are taken from a sprite sheet containing all sprites from the original [Super Metroid](https://en.wikipedia.org/wiki/Super_Metroid) for the SNES. I do not claim ownership to any of the material.
 #### The RGBA file format associated with this project is created using a PNG to RGBA converter, then the RGBA files are custom made by inserting three "words" (4 bytes) into the beginning of each file. The first word contains the height of the image, the second word contains the width, and the third word contains the total number of animation states present within the image. This RGBA file can then be preloaded into the system, loaded, or directly read from memory and then displayed using the functions in the filesystem and graphics namespaces.
 
-## Documentation
+Documentation
 ==============
 ### Please note that this documentation does not include or describe the packaged Vita2d calls that lie within the code. Those are there for testing purposes and their documentation and source can be found [here](https://github.com/xerpi/libvita2d/tree/master/libvita2d)
 #### namespace (functions, members)
