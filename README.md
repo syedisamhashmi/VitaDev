@@ -35,7 +35,8 @@ Documentation
 #### io ([functions](#ioF), [members](#ioM))
 #### preloaded ([functions](#preloadedF), [members](#preloadedM))
 #### utils ([functions](#utilsF), [members](#utilsM))
-
+---
+---
 ## Functions
 ### <a name="colorsF">colors</a>
 ##### ``` uint32_t RGBA832(unsigned char r, unsigned char g, unsigned char b, unsigned char a)``` - Generates a 32 bit formatted RGBA color.
