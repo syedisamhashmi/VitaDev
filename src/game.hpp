@@ -16,8 +16,11 @@ namespace game
     extern unsigned int PLAYER_HEIGHT;
     extern unsigned int PLAYER_WIDTH;
     extern unsigned int PLAYER_BASE_MOVE_SPEED;
-    extern unsigned int PLAYER_MAX_MOVE_SPEED;
-    extern unsigned int SPEED_MODIFIER;
+    extern double PLAYER_MAX_MOVE_SPEED;
+    extern double PLAYER_CURRENT_MAX_MOVE_SPEED;
+    extern double SPEED_MODIFIER;
+    extern double FRICTION;
+    extern int MAX_AXIS_VALUE;
     typedef enum  {PAUSED, UNPAUSED} gamestate;
     typedef enum  {IDLE, MOVING_RIGHT, MOVING_LEFT} Movestate;
     
@@ -37,9 +40,9 @@ namespace game
     class Velocity
     {
         public:
-            signed int x;
-            signed int y;
-            Velocity(signed int x, signed int y)
+            double x;
+            double y;
+            Velocity(double x, double y)
             {
                 this->x = x;
                 this->y = y;
@@ -97,8 +100,8 @@ namespace game
     
     void drawPlayer();
     void checkInput(SceCtrlData pad);
-    
-    
+    void applyFriction();
+    void checkPlayerMaxSpeed();
     
     
     

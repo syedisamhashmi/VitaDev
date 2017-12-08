@@ -16,11 +16,15 @@
 
 namespace game
 {
+    
     unsigned int PLAYER_HEIGHT = 43;
     unsigned int PLAYER_WIDTH = 35;
     unsigned int PLAYER_BASE_MOVE_SPEED = 5;
-    unsigned int PLAYER_MAX_MOVE_SPEED = 15;
-    unsigned int SPEED_MODIFIER = 10;
+    int MAX_AXIS_VALUE = 128;
+    double FRICTION = .2;
+    double PLAYER_MAX_MOVE_SPEED = 40;
+    double PLAYER_CURRENT_MAX_MOVE_SPEED = 10;
+    double SPEED_MODIFIER = .1;
     gamestate state;
     filesystem::Texture* rightrun = filesystem::preload(filesystem::RIGHT_RUN_ANIMATION);
     filesystem::Texture* leftrun = filesystem::preload(filesystem::LEFT_RUN_ANIMATION);
@@ -61,89 +65,104 @@ namespace game
     
     void checkInput(SceCtrlData pad)
     {
-        signed char vallx = (signed char)(pad.lx - 128);
-        signed char vally = (signed char)(pad.ly - 128);
-        signed char valrx = (signed char)(pad.rx - 128);
-        signed char valry = (signed char)(pad.ry - 128);
+        signed char vallx = (signed char)(pad.lx - game::MAX_AXIS_VALUE);
+        signed char vally = (signed char)(pad.ly - game::MAX_AXIS_VALUE);
+        signed char valrx = (signed char)(pad.rx - game::MAX_AXIS_VALUE);
+        signed char valry = (signed char)(pad.ry - game::MAX_AXIS_VALUE);
+        //Read left axis values for y and x.
         player.lastPosition = player.position;
+        
         if(vallx > 10 || vallx < -10)
         {
-//            if(lx > 0)
-//                player.facing = RIGHT;
-//            else
-//                if(lx < 0)
-//                    player.facing = LEFT;
-//            if(lx < 10)
-//                player.movestate = MOVING_LEFT;
-//            else if(lx > 10)
-//                player.movestate = MOVING_RIGHT;
-//            else
-//                player.movestate = NOT_MOVING;
-            game::player.velocity.x += (int)((signed char)vallx/ (signed char)game::PLAYER_BASE_MOVE_SPEED * (signed char)game::SPEED_MODIFIER);
             
+            int i_vallx = (int) vallx;
+            double percent = (double)((double)i_vallx/(double)game::MAX_AXIS_VALUE);
+            double toAdd =  (percent * game::PLAYER_BASE_MOVE_SPEED) * game::SPEED_MODIFIER;
+            game::player.velocity.x += toAdd;
             
-            if(utils::abs(game::player.velocity.x)  > game::PLAYER_MAX_MOVE_SPEED)
-            {
-                if(game::player.velocity.x < 0)
-                {
-                    game::player.velocity.x = -game::PLAYER_MAX_MOVE_SPEED;
-                }
-                else if(game::player.velocity.x > 0)
-                {
-                    game::player.velocity.x = game::PLAYER_MAX_MOVE_SPEED;
-                }
-            }
+            checkPlayerMaxSpeed();
+            
             game::player.position.x += game::player.velocity.x;
             
-            utils::printsf(10, 80, colors::WHITE32, "vallx x: %d,", vallx); //Print out lx.
+            utils::printsf(10, 80, colors::WHITE32, "vallx x: %f,", toAdd); //Print out lx.
 
-            utils::printsf(10, 110, colors::WHITE32, "velocity x: %d,", game::player.velocity.x); //Print out velocity.
-}
+            utils::printsf(10, 110, colors::WHITE32, "velocity x: %f,", game::player.velocity.x); //Print out velocity.
+        }
         
         
     }
     
     void drawPlayer()
     {
+        applyFriction();
+        
         game::player.previousMovestate = game::player.movestate;
-
+        double deltaFrame = utils::abs(game::player.velocity.x) / game::PLAYER_MAX_MOVE_SPEED;
+        game::player.animationFrame = game::player.animationFrame + deltaFrame;
+        
+        if(game::player.movestate != game::player.previousMovestate)
+        {
+            game::player.animationFrame = 0;
+        }
+        
         if(game::player.position.x > game::player.lastPosition.x)
         {
-            game::player.previousMovestate = game::player.movestate;
             game::player.movestate = MOVING_RIGHT;
-            if(game::player.movestate != game::player.previousMovestate)
-            {
-                game::player.animationFrame = 0;
-            }
             graphics::draw_texture_preloaded_scale_part(game::rightrun, game::player.position.x , game::player.position.y, game::PLAYER_HEIGHT, game::PLAYER_WIDTH,2,2, (int)game::player.animationFrame);
-            game::player.animationFrame = game::player.animationFrame + ((double)(game::player.position.x - game::player.lastPosition.x))/((double)game::player.velocity.x*game::PLAYER_BASE_MOVE_SPEED);
         }
-        if(game::player.position.x == game::player.lastPosition.x)
+        else if(game::player.position.x == game::player.lastPosition.x)
         {
-            game::player.velocity.x = 0;
-            game::player.previousMovestate = game::player.movestate;
             game::player.movestate = IDLE;
-            if(game::player.movestate != game::player.previousMovestate)
-            {
-                game::player.animationFrame = 0;
-            }
-            graphics::draw_texture_preloaded_scale_part(game::idle, game::player.position.x , game::player.position.y, 48, 24 ,2,2, (int)game::player.animationFrame);
-            
+            graphics::draw_texture_preloaded_scale_part(game::idle, game::player.position.x , game::player.position.y, 48, 24 ,2,2, (int)game::player.animationFrame); //Idle has special height and width
         }
-        if(game::player.position.x < game::player.lastPosition.x)
+        else if(game::player.position.x < game::player.lastPosition.x)
         {
-            game::player.previousMovestate = game::player.movestate;
             game::player.movestate = MOVING_LEFT;
-            if(game::player.movestate != game::player.previousMovestate)
-            {
-                game::player.animationFrame = 0;
-            }
-            graphics::draw_texture_preloaded_scale_part(game::leftrun, game::player.position.x , game::player.position.y, game::PLAYER_HEIGHT, game::PLAYER_WIDTH,2,2, (int)game::player.animationFrame);
-            game::player.animationFrame = game::player.animationFrame + ((double)(game::player.lastPosition.x - game::player.position.x))/((double)utils::abs(game::player.velocity.x)*game::PLAYER_BASE_MOVE_SPEED);
+            graphics::draw_texture_preloaded_scale_part(game::leftrun, game::player.position.x, game::player.position.y, game::PLAYER_HEIGHT, game::PLAYER_WIDTH,2,2, (int)game::player.animationFrame);
         }
-        
+
         
     }
+    void checkPlayerMaxSpeed()
+    {
+        if(utils::abs(game::player.velocity.x)  > game::PLAYER_CURRENT_MAX_MOVE_SPEED)
+        {
+            if(game::player.velocity.x < 0)
+            {
+                game::player.velocity.x = -game::PLAYER_CURRENT_MAX_MOVE_SPEED;
+            }
+            else if(game::player.velocity.x > 0)
+            {
+                game::player.velocity.x = game::PLAYER_CURRENT_MAX_MOVE_SPEED;
+            }
+        }
+    }
+    void applyFriction()
+    {
+        if(utils::abs(game::player.velocity.x) > game::FRICTION)
+        {
+            if(game::player.velocity.x > 0)
+            {
+                if(game::player.velocity.x - game::FRICTION < 0)
+                {
+                    game::player.velocity.x = 0;
+                }
+                else
+                    game::player.velocity.x -= game::FRICTION;
+            }
+            else if(game::player.velocity.x < 0)
+            {
+                if(game::player.velocity.x + game::FRICTION > 0)
+                {
+                    game::player.velocity.x = 0;
+                }
+                else
+                    game::player.velocity.x += game::FRICTION;
+            }
+            game::player.position.x += game::player.velocity.x;
+        }
+    }
+    
     
     
     

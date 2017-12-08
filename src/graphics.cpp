@@ -511,8 +511,7 @@ namespace graphics
                 for(unsigned int x = 0 ; x < widthPerPiece; x++)
                 {
                     unsigned long int allcolors;
-                    memcpy(&allcolors, &(animation_to_draw[(12 + (pieceNum*widthPerPiece * 4) + ((y *(texture->header.width - widthPerPiece))*4 )
-                                                            + (y* widthPerPiece) * 4) + (x*4)]), 4);
+                    memcpy(&allcolors, &(animation_to_draw[(12 + (pieceNum*widthPerPiece * 4) + ((y *(texture->header.width - widthPerPiece))*4 ) + (y* widthPerPiece) * 4) + (x*4)]), 4);
                     
                     filesystem::pixel tempix = filesystem::pixel(((allcolors >> 0) & 0xFF),
                                                                  ((allcolors >> 8) & 0xFF),
