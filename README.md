@@ -36,18 +36,18 @@
 ### <a name="colorsF">colors</a>
 ##### ```uint32_t RGBA832(unsigned char r, unsigned char g, unsigned char b, unsigned char a)``` - Generates a 32 bit formatted RGBA color.
 ##### ```uint16_t RGB16(unsigned char r, unsigned char g, unsigned char b)``` - Generates a 16 bit formatted RGB color, no alpha.
-### [filesystem](#filesystemF)
+### <a name="filesystemF">filesystem</a>
 ##### ```filesystem::Texture* loadFile(std::string filename)``` - Returns a Texture*. The pixels** of the Texture* contains all RGBA values of the texture loaded and the texture is formatted to width and height of the corresponding rgba file.
 ##### ```filesystem::Header* readHeader(SceUID file)``` - Returns a Header*. This reads the 3 word header of a custom made RGBA file, and returns it as an object that can be attributed to a Texture object.
-##### [```filesystem::Texture* preload(filesystem::preloaded_animations animation)```](#preloadInstructions) - Returns a Texture*. This Texture* can be used in conjunction with the preload graphics display functions to draw a texture. In order to use this function, you must declare a filesystem::preloaded_animations type, you must create an entry for the preloaded texture within the preloaded.hpp file, and lastly you must add a condition case in ```graphics::draw_texture_preloaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY)``` with the format ```if(texture->preloaded == filesystem::preloaded_animations) animation_to_draw = preloaded::animation;```.
-### [font](#fontF)
+##### <a name="preloadInstructions">```filesystem::Texture* preload(filesystem::preloaded_animations animation)```</a> - Returns a Texture*. This Texture* can be used in conjunction with the preload graphics display functions to draw a texture. In order to use this function, you must declare a filesystem::preloaded_animations type, you must create an entry for the preloaded texture within the preloaded.hpp file, and lastly you must add a condition case in ```graphics::draw_texture_preloaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY)``` with the format ```if(texture->preloaded == filesystem::preloaded_animations) animation_to_draw = preloaded::animation;```.
+### <a name="fontF">font</a>
 ##### No functions.
-### [game](#gameF)
+### <a name="gameF">game</a>
 ##### ```void drawPlayer()``` - Draws the player, applies friction, updates animation states, changes animation states.
 ##### ```void checkInput(SceCtrlData pad)``` - Reads input from the SceCtrlData structure passed in.
 ##### ```void applyFriction()``` - Applies a negative velocity force to ensure that the playeer will slow down if no force is given from the user, this is done automatically in drawPlayer.
 ##### ```void checkPlayerMaxSpeed()``` - Ensures that the player does not surpass the set value of  ```game::PLAYER_CURRENT_MAX_MOVE_SPEED```.
-### [graphics](#graphicsF)
+### <a name="graphicsF">graphics</a>
 ##### ```void setUp()``` - Turns off basic functionality from the PS Vita, such as the dimming and timeout of the display.
 ##### ```void initializeFramebuffers()``` - Initializes two framebuffers, these should be freed prior to ending the program.
 ##### ```void freeFramebuffers()``` - Frees the initialized frame buffers.
@@ -66,11 +66,11 @@
 ##### ```void draw_texture_preloaded_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum)``` - Draws a portion of a preloaded texture using the provided portion number at a given coordinate x and y. (Note: This texture MUST be preloaded following the steps explained [here](#preloadInstructions)
 ##### ```void draw_texture_preloaded_scale_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum)``` - Draws a portion of a preloaded texture using the provided portion number at a given coordinate x and y that will also be scaled using the provided new width and height scales. (Note: This texture MUST be preloaded following the steps explained [here](#preloadInstructions)
 ##### ```game::Position checkBounds(int posX, int posY, unsigned int x, unsigned int y)``` - Returns a ```game::Position``` object that represents bounds that are drawable to the screen. This bound is a position representing the coordinate (posX + x, posY + y). This stops segmentation faults in which a position out the bounds of the framebuffer is written to.
-### [io](#ioF)
+### <a name="ioF">io</a>
 ##### ```void getio()``` - Reads all data from buttons and touchscreen.
-### [preloaded](#preloadedF)
+### <a name="preloadedF">preloaded</a>
 ##### No functions.
-### [utils](#utilsF)
+### <a name="utilsF">utils</a>
 ##### ```unsigned int align_mem(unsigned int addr, unsigned int align)``` - Alignes an address to an align offset.
 ##### ```int abs(int val)``` - Returns an integer representing the absolute value of the parameter val.
 ##### ```double abs(double val)``` - Returns a double representing the absolute value of the parameter val.
