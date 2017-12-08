@@ -36,7 +36,7 @@ Documentation
 |graphics  | [functions](#graphicsF)    | [members](#graphicsM)   |
 |io        | [functions](#ioF)          | [members](#ioM)         |
 |preloaded | [functions](#preloadedF)   | [members](#preloadedM)  |
-|utils.    | [functions](#utilsF)       | [members](#utilsM)      |
+|utils     | [functions](#utilsF)       | [members](#utilsM)      |
 
 ---
 ---
