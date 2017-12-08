@@ -27,16 +27,16 @@ Documentation
 ==============
 ### Please note that this documentation does not include or describe the packaged Vita2d calls that lie within the code. Those are there for testing purposes and their documentation and source can be found [here](https://github.com/xerpi/libvita2d/tree/master/libvita2d)
 
-|namespace |        functions           |         members         |
-|:--------:|:--------------------------:|:-----------------------:|
-|colors    | [functions](#colorsF)      | [members](#colorsM)     |
-|filesystem| [functions](#filesystemF)  | [members](#filesystemM) |
-|font      | [functions](#fontF)        | [members](#fontM)       |
-|game      | [functions](#gameF)        | [members](#gameM)       |
-|graphics  | [functions](#graphicsF)    | [members](#graphicsM)   |
-|io        | [functions](#ioF)          | [members](#ioM)         |
-|preloaded | [functions](#preloadedF)   | [members](#preloadedM)  |
-|utils     | [functions](#utilsF)       | [members](#utilsM)      |
+|namespace |        functions           |         members         |           classes          |
+|:--------:|:--------------------------:|:-----------------------:|:--------------------------:|
+|colors    | [functions](#colorsF)      | [members](#colorsM)     | [classes](#colorsC)        |
+|filesystem| [functions](#filesystemF)  | [members](#filesystemM) | [classes](#filesystemC)    |
+|font      | [functions](#fontF)        | [members](#fontM)       | [classes](#fontC)          |
+|game      | [functions](#gameF)        | [members](#gameM)       | [classes](#gameC)          |
+|graphics  | [functions](#graphicsF)    | [members](#graphicsM)   | [classes](#graphicsC)      |
+|io        | [functions](#ioF)          | [members](#ioM)         | [classes](#ioC)            |
+|preloaded | [functions](#preloadedF)   | [members](#preloadedM)  | [classes](#preloadedC)     |
+|utils     | [functions](#utilsF)       | [members](#utilsM)      | [classes](#colorsC)        |
 
 ---
 ---
@@ -156,4 +156,68 @@ Documentation
 ### <a name="utilsM">utils</a>
 ##### ```unsigned char* fontStyle``` - The current fontStyle to be used in the project. (note: automatically set in utils.cpp)
 ---
+## Classes
+### <a name="colorsc">colors</a>
+##### No classes.
+### <a name="filesystemC">filesystem</a>
+##### <a name="headerclassObject">```Header```</a> - Class containing the header of a RGBA file for use in a [Texture](#textureClassObject) object
+> * ```Header(unsigned int height, unsigned int width, unsigned int states)``` - Constructor to create new Header with specified height, width, and states.
+> * ```Header()``` - Constructor to create new Header with height, width, and states set to zero.
+> * ```unsigned int height``` - Represents the height in pixels for the Texture in which the header will reside in.
+> * ```unsigned int width``` - Represents the width in pixels for the Texture in which the header will reside in.
+> * ```unsigned int states``` - Represents the states for the Texture in which the header will reside in.
+
+##### ```pixel``` - Class containing all the necessary information of a pixel.
+> * ```pixel(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha)``` - Constructor to create a pixel with the specified red, green, blue, and alpha.
+> * ```pixel()``` - Constructor to create a pixel with the red, green, blue, and alpha set to zero.
+> * ```unsigned char red``` - Represents the red value of the pixel.
+> * ```unsigned char green``` - Represents the green value of the pixel.
+> * ```unsigned char blue``` - Represents the blue value of the pixel.
+> * ```unsigned char alpha``` - Represents the alpha value of the pixel.
+
+##### <a name="textureClassObject">```Texture```</a> - Class containing all the necessary information of a pixel.
+> * ```filesystem::preloaded_animations preloaded``` - If the texture is preloaded, this will contain the filesystem::preloaded_animations value which it represents.
+> * ```filesystem::Header header``` - The [header](#headerClassObject) of the texture.
+> * ```pixel** pixels``` - Pointer to a two-dimensional array of size [height][width] that contains all pixel data for the texture.
+> * ```void format(unsigned int height, unsigned int width, unsigned int states)``` - Formats the header to represent the specified height, width, and states. Format also resizes the pixel body for the texture to the new specified height and width.
+> * ```Texture(unsigned int height, unsigned int width, unsigned int states)``` - Crates a new texture and formats the header and pixel body to represent the specified height, width, and states. 
+
+### <a name="fontC">font</a>
+##### No classes.
+
+### <a name="gameC">game</a>
+##### ```Velocity``` - Class containing information pertinent to velocity.
+> * ```double x``` - The current velocity in the x direction.
+> * ```double y``` - The current velocity in the y direction.
+> * ```Velocity(double x, double y)``` - Constructor to create a Velocity object with the given x and y velocity.
+> * ``` Velocity()``` - Constructor to create a Velocity object with the x and y velocity equal to zero.
+
+##### ```Position``` - Class containing information regarding positioning.
+> * ```int x``` - The current position on the x axis.
+> * ```int y``` - The current position on the y axis.
+> * ```Position(int x, int y)``` - Constructor to create a Position object with the given x and y coordinates.
+> * ``` Position()``` - Constructor to create a Velocity object with the x and y position set to the center of the screen.
+
+
+##### <a name="entityClassObject">```Entity```</a> - Class containing information for an Entity.
+> * ```Position position``` - The current position of the entity.
+> * ```int y``` - The current position on the y axis.
+> * ```Entity(int x, int y)``` - Constructor to create a Entity object with the given x and y coordinates.
+> * ``` Entity()``` - Constructor to create an Entity object with the x and y position set to the center of the screen.
+
+##### <a name="playerClassObject">```Entity```</a> - Class containing information for the Player. Player extends [Entity](#entityClassObject)
+> * ```Position lastPosition``` - The previous position of the player.
+> * ```Movestate movestate``` - The movestate of the player.
+> * ```Movestate previousMovestate``` - The previous movestate of the player.
+> * ```double animationFrame``` - The current animation frame to use when drawing the player to the screen.
+> * ```unsigned int health``` - The current amount of health the player has.
+> * ```unsigned int missiles``` - The current amount of missiles the player has.
+> * ```Velocity velocity``` - The current velocity of the player.
+> * ```Player()``` - Creates a new Player object that has an IDLE movestate and a previous movestate of IDLE as well.
+
+##### ```Camera``` - Class containing information for the camera.
+> * ```Position positon``` - The position of the camera.
+> * ```Camera()``` - Creates a new Camera object that has an x and y coordinate of center screen.
+> * ```Camera(int x, int y)``` - Creates a new Camera object at the specified x and y coordinates.
+
 
