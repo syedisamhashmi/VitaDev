@@ -23,14 +23,14 @@
 ## Documentation
 ### Please note that this documentation does not include or describe the packaged Vita2d calls that lie within the code. Those are there for testing purposes and their documentation and source can be found [here](https://github.com/xerpi/libvita2d/tree/master/libvita2d)
 #### namespace (functions, members)
-#### colors ([functions](#colorsF), members)
-#### filesystem ([functions](#filesystemF), members)
-#### font ([functions](#fontF), members)
-#### game ([functions](#gameF), members)
-#### graphics ([functions](#graphicsF), members)
-#### io ([functions](#ioF), members)
-#### preloaded ([functions](#preloadedF), members)
-#### utils ([functions](#utilsF), members)
+#### colors ([functions](#colorsF), [members](#colorsM))
+#### filesystem ([functions](#filesystemF), [members](#filesystemM))
+#### font ([functions](#fontF), [members](#fontM))
+#### game ([functions](#gameF), [members](#gameM))
+#### graphics ([functions](#graphicsF), [members](#graphicsM))
+#### io ([functions](#ioF), [members](#ioM))
+#### preloaded ([functions](#preloadedF), [members](#preloadedM))
+#### utils ([functions](#utilsF), [members](#utilsM))
 
 ## Functions
 ### <a name="colorsF">colors</a>
@@ -78,7 +78,72 @@
 ##### ```void prints(int x, int y, uint32_t color, const char *string)``` - Prints a string to a given x and y coordinate.
 ##### ```void printsf(int x, int y, uint32_t color, const char *s, ...)``` - Prints a formatted string to a given x and y coordinate.
 
-
+## Members
+### <a name="colorsM">colors</a>
+##### ```uint32_t RED32``` - An unsigned 32 bit integer representing the RGBA value of red.
+##### ```uint32_t GREEN32``` - An unsigned 32 bit integer representing the RGBA value of green.
+##### ```uint32_t BLUE32``` - An unsigned 32 bit integer representing the RGBA value of blue.
+##### ```uint32_t CYAN32``` - An unsigned 32 bit integer representing the RGBA value of cyan.
+##### ```uint32_t LIME32``` - An unsigned 32 bit integer representing the RGBA value of lime.
+##### ```uint32_t PURPLE32``` - An unsigned 32 bit integer representing the RGBA value of purple.
+##### ```uint32_t WHITE32``` - An unsigned 32 bit integer representing the RGBA value of white.
+##### ```uint32_t BLACK32``` - An unsigned 32 bit integer representing the RGBA value of black.
+##### ```uint16_t RED16```  - An unsigned 16 bit integer representing the RGB value of red.
+##### ```uint16_t GREEN16```  - An unsigned 16 bit integer representing the RGB value of green.
+##### ```uint16_t BLUE16```  - An unsigned 16 bit integer representing the RGB value of blue.
+##### ```uint16_t CYAN16```  - An unsigned 16 bit integer representing the RGB value of cyan.
+##### ```uint16_t LIME16```  - An unsigned 16 bit integer representing the RGB value of lime.
+##### ```uint16_t PURPLE16```  - An unsigned 16 bit integer representing the RGB value of purple.
+##### ```uint16_t WHITE16```  - An unsigned 16 bit integer representing the RGB value of white.
+##### ```uint16_t BLACK16```  - An unsigned 16 bit integer representing the RGB value of black.
+### <a name="filesystemM">filesystem</a>
+##### ```preloaded_animations``` - Enumerated type representing all types of preloaded animations. Values are currently 
+> * ```NOT_PRELOADED``` - Represents a texture type that is not currently preloaded.
+> * ```IDLE_ANIMATION``` - Represents the idle animation texture.
+> * ```RIGHT_RUN_ANIMATION``` - Represents the right run animation texture.
+> * ```LEFT_RUN_ANIMATION``` - Represents the left run animation texture.
+### <a name="fontM">font</a>
+##### ```unsigned char* fontStyle``` - The current fontStyle to be used in the project. (note: automatically set in utils.cpp)
+##### ```unsigned char msx_font``` - An MSX stylized font set.
+##### ```unsigned char bitmapFont``` - Not interactable with current project. May be used in Vita2d, though.
+### <a name="gameM">game</a>
+##### ```unsigned int PLAYER_HEIGHT``` - Represents the height of the player in the game, typically a constant.
+##### ```unsigned int PLAYER_WIDTH``` - Represents the height of the player in the game, typically a constant.
+##### ```double PLAYER_BASE_MOVE_SPEED``` - Represents the base movement speed of the player in the game.
+##### ```double PLAYER_MAX_MOVE_SPEED``` - Represents the maximum allowed movement speed of the player in the game.
+##### ```double PLAYER_CURRENT_MAX_MOVE_SPEED``` - Represents the current maximum allowed movement speed of the player in the game. As this may change during the game, power-ups, etc..
+##### ```double SPEED_MODIFIER``` - Represents a modifier that may affect the speed of a player (different terrain, etc.).
+##### ```double FRICTION``` - Represents a modifier for friction that affects the speed of a player.
+##### ```int MAX_AXIS_VALUE``` - Represents the maximum value that the joysticks may reach.
+##### ```gamestate``` - Enumerated type representing the possible states of the game . Values are currently 
+> * ```PAUSED``` - Represents a gamestate in which the game is currently paused.
+> * ```UNPAUSED``` - Represents a gamestate in which the game is currently unpaused.
+##### ```movestate``` - Enumerated type representing the possible movestates of the player   . Values are currently 
+> * ```IDLE``` - Represents a movestate in which the player is not moving.
+> * ```MOVING_RIGHT``` - Represents a gamestate in which the player is moving to the right.
+> * ```MOVING_LEFT``` - Represents a gamestate in which the player is moving to the left.
+##### ```gamestate state``` - Represents the current state of the game.
+##### ```filesystem::Texture* rightrun``` - Preloaded texture for the rightrun animation.
+##### ```filesystem::Texture* leftrun``` - Preloaded texture for the leftrun animation.
+##### ```filesystem::Texture* idle``` - Preloaded texture for the idle animation.
+##### ```signed char lx``` - Signed character representing the left analog X value.
+##### ```signed char ly``` - Signed character representing the left analog Y value.
+##### ```signed char rx``` - Signed character representing the right analog X value.
+##### ```signed char ry``` - Signed character representing the right analog Y value.
+### <a name="graphicsM">graphics</a>
+##### ```int SCREEN_W``` - Value representing the width of the PS Vita screen in pixels.
+##### ```int SCREEN_H``` - Value representing the height of the PS Vita screen in pixels.
+##### ```int DISPLAY_STRIDE_IN_PIXELS``` - Value representing the stride of the display of the PS Vita screen in pixels.
+##### ```SceDisplayFrameBuf fb``` - Array (size two) that will be containing the frame buffers.
+##### ```SceUID fb_memuid``` - Array (size two) that will be containing the UID's for the frame buffers in order to release them later.
+##### ```int cur_fb``` - Integer representing the current framebuffer being displayed.
+### <a name="ioM">io</a>
+##### ```SceCtrlData pad``` - Structure containing all the controls and their current states (pressed/unpressed).
+##### ```SceTouchData touch``` - Structure containing the touchscreen and current screen touch information.
+### <a name="preloadedM">preloaded</a>
+##### ```unsigned char idle``` - Array containing all RGBA values for the preloaded idle image.
+##### ```unsigned char rightrun``` - Array containing all RGBA values for the preloaded rightrun image.
+##### ```unsigned char leftrun``` - Array containing all RGBA values for the preloaded leftrun image.
 
 
 
