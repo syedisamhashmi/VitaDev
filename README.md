@@ -160,7 +160,7 @@ Documentation
 ### <a name="colorsC">colors</a>
 ##### No classes.
 ### <a name="filesystemC">filesystem</a>
-##### <a name="headerclassObject">```Header```</a> - Class containing the header of a RGBA file for use in a [Texture](#textureClassObject) object
+##### <a name="headerClassObject">```Header```</a> - Class containing the header of a RGBA file for use in a [Texture](#textureClassObject) object
 > * ```Header(unsigned int height, unsigned int width, unsigned int states)``` - Constructor to create new Header with specified height, width, and states.
 > * ```Header()``` - Constructor to create new Header with height, width, and states set to zero.
 > * ```unsigned int height``` - Represents the height in pixels for the Texture in which the header will reside in.
