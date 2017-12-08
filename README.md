@@ -103,7 +103,6 @@
 > * ```RIGHT_RUN_ANIMATION``` - Represents the right run animation texture.
 > * ```LEFT_RUN_ANIMATION``` - Represents the left run animation texture.
 ### <a name="fontM">font</a>
-##### ```unsigned char* fontStyle``` - The current fontStyle to be used in the project. (note: automatically set in utils.cpp)
 ##### ```unsigned char msx_font``` - An MSX stylized font set.
 ##### ```unsigned char bitmapFont``` - Not interactable with current project. May be used in Vita2d, though.
 ### <a name="gameM">game</a>
@@ -115,10 +114,10 @@
 ##### ```double SPEED_MODIFIER``` - Represents a modifier that may affect the speed of a player (different terrain, etc.).
 ##### ```double FRICTION``` - Represents a modifier for friction that affects the speed of a player.
 ##### ```int MAX_AXIS_VALUE``` - Represents the maximum value that the joysticks may reach.
-##### ```gamestate``` - Enumerated type representing the possible states of the game . Values are currently 
+##### ```gamestate``` - Enumerated type representing the possible states of the game. Values are currently 
 > * ```PAUSED``` - Represents a gamestate in which the game is currently paused.
 > * ```UNPAUSED``` - Represents a gamestate in which the game is currently unpaused.
-##### ```movestate``` - Enumerated type representing the possible movestates of the player   . Values are currently 
+##### ```movestate``` - Enumerated type representing the possible movestates of the player. Values are currently 
 > * ```IDLE``` - Represents a movestate in which the player is not moving.
 > * ```MOVING_RIGHT``` - Represents a gamestate in which the player is moving to the right.
 > * ```MOVING_LEFT``` - Represents a gamestate in which the player is moving to the left.
@@ -144,6 +143,7 @@
 ##### ```unsigned char idle``` - Array containing all RGBA values for the preloaded idle image.
 ##### ```unsigned char rightrun``` - Array containing all RGBA values for the preloaded rightrun image.
 ##### ```unsigned char leftrun``` - Array containing all RGBA values for the preloaded leftrun image.
-
+### <a name="utilsM">utils</a>
+##### ```unsigned char* fontStyle``` - The current fontStyle to be used in the project. (note: automatically set in utils.cpp)
 
 
