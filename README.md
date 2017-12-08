@@ -98,10 +98,11 @@
 ##### ```uint16_t BLACK16```  - An unsigned 16 bit integer representing the RGB value of black.
 ### <a name="filesystemM">filesystem</a>
 ##### ```preloaded_animations``` - Enumerated type representing all types of preloaded animations. Values are currently
-##### > * ```NOT_PRELOADED``` - Represents a texture type that is not currently preloaded.
-##### > * ```IDLE_ANIMATION``` - Represents the idle animation texture.
-##### > * ```RIGHT_RUN_ANIMATION``` - Represents the right run animation texture.
-##### > * ```LEFT_RUN_ANIMATION``` - Represents the left run animation texture.
+> * ```NOT_PRELOADED``` - Represents a texture type that is not currently preloaded.
+> * ```IDLE_ANIMATION``` - Represents the idle animation texture.
+> * ```RIGHT_RUN_ANIMATION``` - Represents the right run animation texture.
+> * ```LEFT_RUN_ANIMATION``` - Represents the left run animation texture.
+
 ### <a name="fontM">font</a>
 ##### ```unsigned char msx_font``` - An MSX stylized font set.
 ##### ```unsigned char bitmapFont``` - Not interactable with current project. May be used in Vita2d, though.
@@ -121,6 +122,7 @@
 > * ```IDLE``` - Represents a movestate in which the player is not moving.
 > * ```MOVING_RIGHT``` - Represents a gamestate in which the player is moving to the right.
 > * ```MOVING_LEFT``` - Represents a gamestate in which the player is moving to the left.
+
 ##### ```gamestate state``` - Represents the current state of the game.
 ##### ```filesystem::Texture* rightrun``` - Preloaded texture for the rightrun animation.
 ##### ```filesystem::Texture* leftrun``` - Preloaded texture for the leftrun animation.
