@@ -26,15 +26,18 @@ Assets
 Documentation
 ==============
 ### Please note that this documentation does not include or describe the packaged Vita2d calls that lie within the code. Those are there for testing purposes and their documentation and source can be found [here](https://github.com/xerpi/libvita2d/tree/master/libvita2d)
-#### namespace (functions, members)
-#### colors ([functions](#colorsF), [members](#colorsM))
-#### filesystem ([functions](#filesystemF), [members](#filesystemM))
-#### font ([functions](#fontF), [members](#fontM))
-#### game ([functions](#gameF), [members](#gameM))
-#### graphics ([functions](#graphicsF), [members](#graphicsM))
-#### io ([functions](#ioF), [members](#ioM))
-#### preloaded ([functions](#preloadedF), [members](#preloadedM))
-#### utils ([functions](#utilsF), [members](#utilsM))
+
+|namespace |        functions           |         members         |
+|:--------:|:--------------------------:|:-----------------------:|
+|colors    |([functions](#colorsF)      | [members](#colorsM))    |
+|filesystem| ([functions](#filesystemF) | [members](#filesystemM))|
+|font      |([functions](#fontF)        | [members](#fontM))      |
+|game      |([functions](#gameF)        | [members](#gameM))      |
+|graphics  |([functions](#graphicsF)    | [members](#graphicsM))  |
+|io        |([functions](#ioF)          | [members](#ioM))        |
+|preloaded |([functions](#preloadedF)   | [members](#preloadedM)) |
+|utils.    | ([functions](#utilsF)      | [members](#utilsM))     |
+
 ---
 ---
 ## Functions
@@ -82,7 +85,7 @@ Documentation
 ##### ```void printc(int x, int y, uint32_t color, char c)``` - Prints a character to a given x and y coordinate.
 ##### ```void prints(int x, int y, uint32_t color, const char *string)``` - Prints a string to a given x and y coordinate.
 ##### ```void printsf(int x, int y, uint32_t color, const char *s, ...)``` - Prints a formatted string to a given x and y coordinate.
-
+---
 ## Members
 ### <a name="colorsM">colors</a>
 ##### ```uint32_t RED32``` - An unsigned 32 bit integer representing the RGBA value of red.
@@ -152,5 +155,5 @@ Documentation
 ##### ```unsigned char leftrun``` - Array containing all RGBA values for the preloaded leftrun image.
 ### <a name="utilsM">utils</a>
 ##### ```unsigned char* fontStyle``` - The current fontStyle to be used in the project. (note: automatically set in utils.cpp)
-
+---
 
