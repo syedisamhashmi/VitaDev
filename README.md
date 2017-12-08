@@ -29,14 +29,14 @@ Documentation
 
 |namespace |        functions           |         members         |           classes          |
 |:--------:|:--------------------------:|:-----------------------:|:--------------------------:|
-|colors    |[functions](#colorsF)| [members](#colorsM)     | [classes](#colorsC)        |
-|filesystem|[functions](#filesystemF)| [members](#filesystemM) | [classes](#filesystemC)    |
-|font      |[functions](#fontF)| [members](#fontM)       | [classes](#fontC)          |
-|game      |[functions](#gameF)| [members](#gameM)       | [classes](#gameC)          |
-|graphics  |[functions](#graphicsF)| [members](#graphicsM)   | [classes](#graphicsC)      |
-|io        |[functions](#ioF)| [members](#ioM)         | [classes](#ioC)            |
-|preloaded |[functions](#preloadedF)| [members](#preloadedM)  | [classes](#preloadedC)     |
-|utils     |[functions](#utilsF)| [members](#utilsM)      | [classes](#utilsC)         |
+|colors|[functions](#colorsF)|[members](#colorsM)|[classes](#colorsC)|
+|filesystem|[functions](#filesystemF)|[members](#filesystemM) |[classes](#filesystemC)|
+|font|[functions](#fontF)|[members](#fontM)|[classes](#fontC)|
+|game|[functions](#gameF)|[members](#gameM)|[classes](#gameC)|
+|graphics|[functions](#graphicsF)|[members](#graphicsM)|[classes](#graphicsC)|
+|io|[functions](#ioF)|[members](#ioM)| [classes](#ioC)|
+|preloaded|[functions](#preloadedF)|[members](#preloadedM)|[classes](#preloadedC)|
+|utils|[functions](#utilsF)|[members](#utilsM)|[classes](#utilsC)|
 
 ---
 ---
