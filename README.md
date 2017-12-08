@@ -33,7 +33,7 @@
 #### utils ([functions](#utilsF), members)
 
 ## Functions
-### [colors](#colorsF)
+### <a name="colorsF">colors</a>
 ##### ```uint32_t RGBA832(unsigned char r, unsigned char g, unsigned char b, unsigned char a)``` - Generates a 32 bit formatted RGBA color.
 ##### ```uint16_t RGB16(unsigned char r, unsigned char g, unsigned char b)``` - Generates a 16 bit formatted RGB color, no alpha.
 ### [filesystem](#filesystemF)
