@@ -198,14 +198,13 @@ Documentation
 > * ```Position(int x, int y)``` - Constructor to create a Position object with the given x and y coordinates.
 > * ``` Position()``` - Constructor to create a Velocity object with the x and y position set to the center of the screen.
 
-
 ##### <a name="entityClassObject">```Entity```</a> - Class containing information for an Entity.
 > * ```Position position``` - The current position of the entity.
 > * ```int y``` - The current position on the y axis.
 > * ```Entity(int x, int y)``` - Constructor to create a Entity object with the given x and y coordinates.
 > * ``` Entity()``` - Constructor to create an Entity object with the x and y position set to the center of the screen.
 
-##### <a name="playerClassObject">```Entity```</a> - Class containing information for the Player. Player extends [Entity](#entityClassObject)
+##### <a name="playerClassObject">```Player```</a> - Class containing information for the Player. Player extends [Entity](#entityClassObject)
 > * ```Position lastPosition``` - The previous position of the player.
 > * ```Movestate movestate``` - The movestate of the player.
 > * ```Movestate previousMovestate``` - The previous movestate of the player.
@@ -220,5 +219,14 @@ Documentation
 > * ```Camera()``` - Creates a new Camera object that has an x and y coordinate of center screen.
 > * ```Camera(int x, int y)``` - Creates a new Camera object at the specified x and y coordinates.
 
+### <a name="graphicsC">graphics</a>
+##### No classes.
 
+### <a name="ioC">io</a>
+##### No classes.
 
+### <a name="preloadedC">preloaded</a>
+##### No classes.
+
+### <a name="utilsC">utils</a>
+##### No classes.
