@@ -63,7 +63,7 @@ namespace filesystem
     filesystem::Texture* loadFile_multiThread(std::string filename);
     int read(SceSize args, void* argp);
     filesystem::Header* readHeader(SceUID file);
-    filesystem::Texture* preload(preloaded_animations animation);
+    filesystem::Texture* preload(filesystem::preloaded_animations animation);
 }
 
 

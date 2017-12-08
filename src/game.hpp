@@ -15,7 +15,7 @@ namespace game
 {
     extern unsigned int PLAYER_HEIGHT;
     extern unsigned int PLAYER_WIDTH;
-    extern unsigned int PLAYER_BASE_MOVE_SPEED;
+    extern double PLAYER_BASE_MOVE_SPEED;
     extern double PLAYER_MAX_MOVE_SPEED;
     extern double PLAYER_CURRENT_MAX_MOVE_SPEED;
     extern double SPEED_MODIFIER;

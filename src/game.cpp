@@ -19,7 +19,7 @@ namespace game
     
     unsigned int PLAYER_HEIGHT = 43;
     unsigned int PLAYER_WIDTH = 35;
-    unsigned int PLAYER_BASE_MOVE_SPEED = 5;
+    double PLAYER_BASE_MOVE_SPEED = 5;
     int MAX_AXIS_VALUE = 128;
     double FRICTION = .2;
     double PLAYER_MAX_MOVE_SPEED = 40;

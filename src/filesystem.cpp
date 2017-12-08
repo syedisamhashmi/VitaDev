@@ -153,7 +153,7 @@ namespace filesystem
     }
     
     
-    filesystem::Texture* preload(preloaded_animations animation)
+    filesystem::Texture* preload(filesystem::preloaded_animations animation)
     {
         filesystem::Texture* temp = new Texture(0,0,0);
         temp->preloaded = filesystem::NOT_PRELOADED;

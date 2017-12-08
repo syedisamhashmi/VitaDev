@@ -22,6 +22,7 @@ namespace graphics
     static SceDisplayFrameBuf fb[2];
     static SceUID fb_memuid[2];
     static int cur_fb = 0;
+    
     void gpu_free(SceUID uid);
     
     
