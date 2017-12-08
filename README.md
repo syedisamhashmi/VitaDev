@@ -29,14 +29,14 @@ Documentation
 
 |namespace |        functions           |         members         |
 |:--------:|:--------------------------:|:-----------------------:|
-|colors    |([functions](#colorsF)      | [members](#colorsM))    |
-|filesystem| ([functions](#filesystemF) | [members](#filesystemM))|
-|font      |([functions](#fontF)        | [members](#fontM))      |
-|game      |([functions](#gameF)        | [members](#gameM))      |
-|graphics  |([functions](#graphicsF)    | [members](#graphicsM))  |
-|io        |([functions](#ioF)          | [members](#ioM))        |
-|preloaded |([functions](#preloadedF)   | [members](#preloadedM)) |
-|utils.    | ([functions](#utilsF)      | [members](#utilsM))     |
+|colors    | [functions](#colorsF)      | [members](#colorsM)     |
+|filesystem| [functions](#filesystemF)  | [members](#filesystemM) |
+|font      | [functions](#fontF)        | [members](#fontM)       |
+|game      | [functions](#gameF)        | [members](#gameM)       |
+|graphics  | [functions](#graphicsF)    | [members](#graphicsM)   |
+|io        | [functions](#ioF)          | [members](#ioM)         |
+|preloaded | [functions](#preloadedF)   | [members](#preloadedM)  |
+|utils.    | [functions](#utilsF)       | [members](#utilsM)      |
 
 ---
 ---
