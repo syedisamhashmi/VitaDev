@@ -18,3 +18,132 @@
 
 ## Assets
 #### The assets seen are taken from a sprite sheet containing all sprites from the original [Super Metroid](https://en.wikipedia.org/wiki/Super_Metroid) for the SNES. I do not claim ownership to any of the material.
+#### The RGBA file format associated with this project is created using a PNG to RGBA converter, then the RGBA files are custom made by inserting three "words" (4 bytes) into the beginning of each file. The first word contains the height of the image, the second word contains the width, and the third word contains the total number of animation states present within the image. This RGBA file can then be preloaded into the system, loaded, or directly read from memory and then displayed using the functions in the filesystem and graphics namespaces.
+
+## Documentation
+### Please note that this documentation does not include or describe the packaged Vita2d calls that lie within the code. Those are there for testing purposes and their documentation and source can be found [here](https://github.com/xerpi/libvita2d/tree/master/libvita2d)
+#### namespace (functions, members)
+#### colors ([functions](#colorsF), [members](#colorsM))
+#### filesystem ([functions](#filesystemF), [members](#filesystemM))
+#### font ([functions](#fontF), [members](#fontM))
+#### game ([functions](#gameF), [members](#gameM))
+#### graphics ([functions](#graphicsF), [members](#graphicsM))
+#### io ([functions](#ioF), [members](#ioM))
+#### preloaded ([functions](#preloadedF), [members](#preloadedM))
+#### utils ([functions](#utilsF), [members](#utilsM))
+
+## Functions
+### <a name="colorsF">colors</a>
+##### ```uint32_t RGBA832(unsigned char r, unsigned char g, unsigned char b, unsigned char a)``` - Generates a 32 bit formatted RGBA color.
+##### ```uint16_t RGB16(unsigned char r, unsigned char g, unsigned char b)``` - Generates a 16 bit formatted RGB color, no alpha.
+### <a name="filesystemF">filesystem</a>
+##### ```filesystem::Texture* loadFile(std::string filename)``` - Returns a Texture*. The pixels** of the Texture* contains all RGBA values of the texture loaded and the texture is formatted to width and height of the corresponding rgba file.
+##### ```filesystem::Header* readHeader(SceUID file)``` - Returns a Header*. This reads the 3 word header of a custom made RGBA file, and returns it as an object that can be attributed to a Texture object.
+##### <a name="preloadInstructions">```filesystem::Texture* preload(filesystem::preloaded_animations animation)```</a> - Returns a Texture*. This Texture* can be used in conjunction with the preload graphics display functions to draw a texture. In order to use this function, you must declare a filesystem::preloaded_animations type, you must create an entry for the preloaded texture within the preloaded.hpp file, and lastly you must add a condition case in ```graphics::draw_texture_preloaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY)``` with the format ```if(texture->preloaded == filesystem::preloaded_animations) animation_to_draw = preloaded::animation;```.
+### <a name="fontF">font</a>
+##### No functions.
+### <a name="gameF">game</a>
+##### ```void drawPlayer()``` - Draws the player, applies friction, updates animation states, changes animation states.
+##### ```void checkInput(SceCtrlData pad)``` - Reads input from the SceCtrlData structure passed in.
+##### ```void applyFriction()``` - Applies a negative velocity force to ensure that the playeer will slow down if no force is given from the user, this is done automatically in drawPlayer.
+##### ```void checkPlayerMaxSpeed()``` - Ensures that the player does not surpass the set value of  ```game::PLAYER_CURRENT_MAX_MOVE_SPEED```.
+### <a name="graphicsF">graphics</a>
+##### ```void setUp()``` - Turns off basic functionality from the PS Vita, such as the dimming and timeout of the display.
+##### ```void initializeFramebuffers()``` - Initializes two framebuffers, these should be freed prior to ending the program.
+##### ```void freeFramebuffers()``` - Frees the initialized frame buffers.
+##### ```void swapFramebuffers()``` - Swaps the initialized frame buffers, should preferably be done upon a vertical blank from the system.
+##### ```void clearScreen()``` - Sets the framebuffer's color (base member variable) completely to white.
+##### ```void colorScreen(uint16_t color)``` - Sets the framebuffers's color (base member variable) completely to the supplied color. This color may be obtained from ```colors::RGB16(unsigned char r, unsigned char g, unsigned char b)``` or may be self-formatted. 
+##### ```void draw_pixel(uint32_t x, uint32_t y, uint32_t color)``` - Sets a pixel at a given x and y coordinate in the current framebuffer to a supplied color. This color may be obtained from ```colors::RGBA832(unsigned char r, unsigned char g, unsigned char b, unsigned char a)``` or may be self-formatted.
+##### ```void draw_texture_loaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY)``` - Draws a loaded texture using the provided Texture* at a given position x and y.
+##### ```void draw_texture_loaded_scale(filesystem::Texture* texture, unsigned int posX, unsigned int posY, double newHeightScale, double newWidthScale)``` - Draws a loaded texture using the provided Texture* at a given position x and y after scaling the texture with the provided scale proportions in the width and height directions.
+##### ```void draw_texture_loaded_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum)``` - Draws a portion of a loaded texture using the provided Texture* and the provided portion number at a given position x and y. Useful for animation.
+##### ```void draw_texture_loaded_scale_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum)``` - Draws a portion loaded texture using the provided Texture* using the provided portion number at a given position x and y after scaling the texture with the provided scale proportions in the width and height directions. Useful for animation.
+##### ```void draw_texture_file(std::string filename, unsigned int posX, unsigned int posY)``` - Draws a texture directly from a file at a given position x and y. (Note: This only works with formatted RGBA files)
+##### ```void draw_texture_file_part(std::string filename, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum)``` - Draws a portion of a texture using the portion number provided directly from a file at a given position x and y. Useful for animation. (Note: This only works with formatted RGBA files)
+##### ```void draw_texture_file_scale_part(std::string filename, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum)``` - Draws a portion of a texture using the portion number provided directly from a file at a given position x and y and scaled using the provided width and height scales. Useful for animation. (Note: This only works with formatted RGBA files)
+##### ```void draw_texture_preloaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY)``` - Draws a preloaded texture at a given coordinate x and y. (Note: This texture MUST be preloaded following the steps explained [here](#preloadInstructions)
+##### ```void draw_texture_preloaded_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum)``` - Draws a portion of a preloaded texture using the provided portion number at a given coordinate x and y. (Note: This texture MUST be preloaded following the steps explained [here](#preloadInstructions)
+##### ```void draw_texture_preloaded_scale_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum)``` - Draws a portion of a preloaded texture using the provided portion number at a given coordinate x and y that will also be scaled using the provided new width and height scales. (Note: This texture MUST be preloaded following the steps explained [here](#preloadInstructions)
+##### ```game::Position checkBounds(int posX, int posY, unsigned int x, unsigned int y)``` - Returns a ```game::Position``` object that represents bounds that are drawable to the screen. This bound is a position representing the coordinate (posX + x, posY + y). This stops segmentation faults in which a position out the bounds of the framebuffer is written to.
+### <a name="ioF">io</a>
+##### ```void getio()``` - Reads all data from buttons and touchscreen.
+### <a name="preloadedF">preloaded</a>
+##### No functions.
+### <a name="utilsF">utils</a>
+##### ```unsigned int align_mem(unsigned int addr, unsigned int align)``` - Alignes an address to an align offset.
+##### ```int abs(int val)``` - Returns an integer representing the absolute value of the parameter val.
+##### ```double abs(double val)``` - Returns a double representing the absolute value of the parameter val.
+##### ```void printc(int x, int y, uint32_t color, char c)``` - Prints a character to a given x and y coordinate.
+##### ```void prints(int x, int y, uint32_t color, const char *string)``` - Prints a string to a given x and y coordinate.
+##### ```void printsf(int x, int y, uint32_t color, const char *s, ...)``` - Prints a formatted string to a given x and y coordinate.
+
+## Members
+### <a name="colorsM">colors</a>
+##### ```uint32_t RED32``` - An unsigned 32 bit integer representing the RGBA value of red.
+##### ```uint32_t GREEN32``` - An unsigned 32 bit integer representing the RGBA value of green.
+##### ```uint32_t BLUE32``` - An unsigned 32 bit integer representing the RGBA value of blue.
+##### ```uint32_t CYAN32``` - An unsigned 32 bit integer representing the RGBA value of cyan.
+##### ```uint32_t LIME32``` - An unsigned 32 bit integer representing the RGBA value of lime.
+##### ```uint32_t PURPLE32``` - An unsigned 32 bit integer representing the RGBA value of purple.
+##### ```uint32_t WHITE32``` - An unsigned 32 bit integer representing the RGBA value of white.
+##### ```uint32_t BLACK32``` - An unsigned 32 bit integer representing the RGBA value of black.
+##### ```uint16_t RED16```  - An unsigned 16 bit integer representing the RGB value of red.
+##### ```uint16_t GREEN16```  - An unsigned 16 bit integer representing the RGB value of green.
+##### ```uint16_t BLUE16```  - An unsigned 16 bit integer representing the RGB value of blue.
+##### ```uint16_t CYAN16```  - An unsigned 16 bit integer representing the RGB value of cyan.
+##### ```uint16_t LIME16```  - An unsigned 16 bit integer representing the RGB value of lime.
+##### ```uint16_t PURPLE16```  - An unsigned 16 bit integer representing the RGB value of purple.
+##### ```uint16_t WHITE16```  - An unsigned 16 bit integer representing the RGB value of white.
+##### ```uint16_t BLACK16```  - An unsigned 16 bit integer representing the RGB value of black.
+### <a name="filesystemM">filesystem</a>
+##### ```preloaded_animations``` - Enumerated type representing all types of preloaded animations. Values are currently 
+> * ```NOT_PRELOADED``` - Represents a texture type that is not currently preloaded.
+> * ```IDLE_ANIMATION``` - Represents the idle animation texture.
+> * ```RIGHT_RUN_ANIMATION``` - Represents the right run animation texture.
+> * ```LEFT_RUN_ANIMATION``` - Represents the left run animation texture.
+### <a name="fontM">font</a>
+##### ```unsigned char msx_font``` - An MSX stylized font set.
+##### ```unsigned char bitmapFont``` - Not interactable with current project. May be used in Vita2d, though.
+### <a name="gameM">game</a>
+##### ```unsigned int PLAYER_HEIGHT``` - Represents the height of the player in the game, typically a constant.
+##### ```unsigned int PLAYER_WIDTH``` - Represents the height of the player in the game, typically a constant.
+##### ```double PLAYER_BASE_MOVE_SPEED``` - Represents the base movement speed of the player in the game.
+##### ```double PLAYER_MAX_MOVE_SPEED``` - Represents the maximum allowed movement speed of the player in the game.
+##### ```double PLAYER_CURRENT_MAX_MOVE_SPEED``` - Represents the current maximum allowed movement speed of the player in the game. As this may change during the game, power-ups, etc..
+##### ```double SPEED_MODIFIER``` - Represents a modifier that may affect the speed of a player (different terrain, etc.).
+##### ```double FRICTION``` - Represents a modifier for friction that affects the speed of a player.
+##### ```int MAX_AXIS_VALUE``` - Represents the maximum value that the joysticks may reach.
+##### ```gamestate``` - Enumerated type representing the possible states of the game. Values are currently 
+> * ```PAUSED``` - Represents a gamestate in which the game is currently paused.
+> * ```UNPAUSED``` - Represents a gamestate in which the game is currently unpaused.
+##### ```movestate``` - Enumerated type representing the possible movestates of the player. Values are currently 
+> * ```IDLE``` - Represents a movestate in which the player is not moving.
+> * ```MOVING_RIGHT``` - Represents a gamestate in which the player is moving to the right.
+> * ```MOVING_LEFT``` - Represents a gamestate in which the player is moving to the left.
+##### ```gamestate state``` - Represents the current state of the game.
+##### ```filesystem::Texture* rightrun``` - Preloaded texture for the rightrun animation.
+##### ```filesystem::Texture* leftrun``` - Preloaded texture for the leftrun animation.
+##### ```filesystem::Texture* idle``` - Preloaded texture for the idle animation.
+##### ```signed char lx``` - Signed character representing the left analog X value.
+##### ```signed char ly``` - Signed character representing the left analog Y value.
+##### ```signed char rx``` - Signed character representing the right analog X value.
+##### ```signed char ry``` - Signed character representing the right analog Y value.
+### <a name="graphicsM">graphics</a>
+##### ```int SCREEN_W``` - Value representing the width of the PS Vita screen in pixels.
+##### ```int SCREEN_H``` - Value representing the height of the PS Vita screen in pixels.
+##### ```int DISPLAY_STRIDE_IN_PIXELS``` - Value representing the stride of the display of the PS Vita screen in pixels.
+##### ```SceDisplayFrameBuf fb``` - Array (size two) that will be containing the frame buffers.
+##### ```SceUID fb_memuid``` - Array (size two) that will be containing the UID's for the frame buffers in order to release them later.
+##### ```int cur_fb``` - Integer representing the current framebuffer being displayed.
+### <a name="ioM">io</a>
+##### ```SceCtrlData pad``` - Structure containing all the controls and their current states (pressed/unpressed).
+##### ```SceTouchData touch``` - Structure containing the touchscreen and current screen touch information.
+### <a name="preloadedM">preloaded</a>
+##### ```unsigned char idle``` - Array containing all RGBA values for the preloaded idle image.
+##### ```unsigned char rightrun``` - Array containing all RGBA values for the preloaded rightrun image.
+##### ```unsigned char leftrun``` - Array containing all RGBA values for the preloaded leftrun image.
+### <a name="utilsM">utils</a>
+##### ```unsigned char* fontStyle``` - The current fontStyle to be used in the project. (note: automatically set in utils.cpp)
+
+
