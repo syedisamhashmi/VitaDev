@@ -36,7 +36,7 @@ Documentation
 |graphics  | [functions](#graphicsF)    | [members](#graphicsM)   | [classes](#graphicsC)      |
 |io        | [functions](#ioF)          | [members](#ioM)         | [classes](#ioC)            |
 |preloaded | [functions](#preloadedF)   | [members](#preloadedM)  | [classes](#preloadedC)     |
-|utils     | [functions](#utilsF)       | [members](#utilsM)      | [classes](#colorsC)        |
+|utils     | [functions](#utilsF)       | [members](#utilsM)      | [classes](#utilsC)        |
 
 ---
 ---
@@ -157,7 +157,7 @@ Documentation
 ##### ```unsigned char* fontStyle``` - The current fontStyle to be used in the project. (note: automatically set in utils.cpp)
 ---
 ## Classes
-### <a name="colorsc">colors</a>
+### <a name="colorsC">colors</a>
 ##### No classes.
 ### <a name="filesystemC">filesystem</a>
 ##### <a name="headerclassObject">```Header```</a> - Class containing the header of a RGBA file for use in a [Texture](#textureClassObject) object
@@ -219,5 +219,6 @@ Documentation
 > * ```Position positon``` - The position of the camera.
 > * ```Camera()``` - Creates a new Camera object that has an x and y coordinate of center screen.
 > * ```Camera(int x, int y)``` - Creates a new Camera object at the specified x and y coordinates.
+
 
 
