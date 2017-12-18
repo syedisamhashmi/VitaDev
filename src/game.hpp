@@ -69,6 +69,7 @@ namespace game
             Entity();
             Entity(int x, int y);
     };
+    
     class Player : public Entity
     {
         public:
@@ -96,7 +97,6 @@ namespace game
             Position position;
     };
     
-    class Game;
     
     void drawPlayer();
     void checkInput(SceCtrlData pad);

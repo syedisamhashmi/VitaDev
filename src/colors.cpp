@@ -29,6 +29,7 @@ namespace colors
     uint32_t PURPLE32 = RGBA832(147, 112, 219, 255);
     uint32_t WHITE32 = RGBA832(255, 255, 255, 255);
     uint32_t BLACK32 = RGBA832(0,   0,   0,   255);
+    uint32_t CLEAR32 = RGBA832(0,   0,   0,   0);
     
     uint16_t RED16 =  RGB16(255, 0,   0);
     uint16_t GREEN16 = RGB16(0,   255, 0);

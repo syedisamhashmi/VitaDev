@@ -23,6 +23,7 @@ namespace colors
     extern uint32_t PURPLE32;
     extern uint32_t WHITE32;
     extern uint32_t BLACK32;
+    extern uint32_t CLEAR32;
     
     extern uint16_t RED16;
     extern uint16_t GREEN16;

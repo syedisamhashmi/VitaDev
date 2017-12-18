@@ -35,10 +35,6 @@ namespace game
     signed char rx; //Right analog X
     signed char ry; //Right analog Y
     
-    
-    
-    
-    
     Player player;
     
     Entity::Entity()
@@ -104,7 +100,6 @@ namespace game
         {
             game::player.animationFrame = 0;
         }
-        
         if(game::player.position.x > game::player.lastPosition.x)
         {
             game::player.movestate = MOVING_RIGHT;

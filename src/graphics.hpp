@@ -17,7 +17,7 @@ namespace graphics
     static int SCREEN_W = 960;
     static int SCREEN_H = 544;
     static int DISPLAY_STRIDE_IN_PIXELS = 1024;
-   
+    
     
     static SceDisplayFrameBuf fb[2];
     static SceUID fb_memuid[2];
@@ -46,7 +46,7 @@ namespace graphics
     void clearScreen(); //Set framebuffer.base to white (wholescreen)
     void colorScreen(uint16_t color); //Specify color using RBH or defined color::
     void draw_pixel(uint32_t x, uint32_t y, uint32_t color);
-    
+    uint32_t getPixel(uint32_t x, uint32_t y);
     
     //Use filesystem::openfile or filesystem::preload to obtain a Texture*
     

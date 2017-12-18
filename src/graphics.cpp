@@ -100,6 +100,8 @@ namespace graphics
         /* Initialize the GXM */
         ret = sceGxmInitialize(&params);
         
+
+        
         /* Setup framebuffers */
         fb[0].size        = sizeof(fb[0]);
         fb[0].pitch       = SCREEN_W;
@@ -134,6 +136,10 @@ namespace graphics
         /* Display the framebuffer 0 */
         cur_fb = 0;
         swapFramebuffers();
+        
+        
+       
+        
     }
     void freeFramebuffers()
     {
@@ -157,6 +163,10 @@ namespace graphics
     void draw_pixel(uint32_t x, uint32_t y, uint32_t color)
     {
         ((uint32_t *)fb[cur_fb].base)[x + y*fb[cur_fb].pitch] = color;
+    }
+    uint32_t getPixel(uint32_t x, uint32_t y)
+    {
+        return ((uint32_t *)fb[cur_fb].base)[x + y*fb[cur_fb].pitch];
     }
     
     
@@ -488,7 +498,6 @@ namespace graphics
             pieceNum = (int)(pieceNum % texture->header.states);
         }
         filesystem::Texture* part = new filesystem::Texture(heightPerPiece, widthPerPiece, texture->header.states);
-       
         
         if(texture->preloaded != filesystem::NOT_PRELOADED)
         {
