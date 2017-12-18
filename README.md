@@ -63,6 +63,7 @@ Documentation
 ##### ```void clearScreen()``` - Sets the framebuffer's color (base member variable) completely to white.
 ##### ```void colorScreen(uint16_t color)``` - Sets the framebuffers's color (base member variable) completely to the supplied color. This color may be obtained from ```colors::RGB16(unsigned char r, unsigned char g, unsigned char b)``` or may be self-formatted.
 ##### ```void draw_pixel(uint32_t x, uint32_t y, uint32_t color)``` - Sets a pixel at a given x and y coordinate in the current framebuffer to a supplied color. This color may be obtained from ```colors::RGBA832(unsigned char r, unsigned char g, unsigned char b, unsigned char a)``` or may be self-formatted.
+##### ```uint32_t getPixel(uint32_t x, uint32_t y)``` - Gets a unsigned thirty-two bit color at a given x and y coordinate in the current framebuffer.
 ##### ```void draw_texture_loaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY)``` - Draws a loaded texture using the provided Texture* at a given position x and y.
 ##### ```void draw_texture_loaded_scale(filesystem::Texture* texture, unsigned int posX, unsigned int posY, double newHeightScale, double newWidthScale)``` - Draws a loaded texture using the provided Texture* at a given position x and y after scaling the texture with the provided scale proportions in the width and height directions.
 ##### ```void draw_texture_loaded_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum)``` - Draws a portion of a loaded texture using the provided Texture* and the provided portion number at a given position x and y. Useful for animation.
@@ -96,6 +97,7 @@ Documentation
 ##### ```uint32_t PURPLE32``` - An unsigned 32 bit integer representing the RGBA value of purple.
 ##### ```uint32_t WHITE32``` - An unsigned 32 bit integer representing the RGBA value of white.
 ##### ```uint32_t BLACK32``` - An unsigned 32 bit integer representing the RGBA value of black.
+##### ```uint32_t CLEAR32``` - An unsigned 32 bit integer representing the RGBA value of clear.
 ##### ```uint16_t RED16```  - An unsigned 16 bit integer representing the RGB value of red.
 ##### ```uint16_t GREEN16```  - An unsigned 16 bit integer representing the RGB value of green.
 ##### ```uint16_t BLUE16```  - An unsigned 16 bit integer representing the RGB value of blue.
@@ -104,6 +106,7 @@ Documentation
 ##### ```uint16_t PURPLE16```  - An unsigned 16 bit integer representing the RGB value of purple.
 ##### ```uint16_t WHITE16```  - An unsigned 16 bit integer representing the RGB value of white.
 ##### ```uint16_t BLACK16```  - An unsigned 16 bit integer representing the RGB value of black.
+ 
 ### <a name="filesystemM">filesystem</a>
 ##### ```preloaded_animations``` - Enumerated type representing all types of preloaded animations. Values are currently
 > * ```NOT_PRELOADED``` - Represents a texture type that is not currently preloaded.
