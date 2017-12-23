@@ -50,7 +50,7 @@ Documentation
 ##### ```filesystem::Header* readHeader(SceUID file)``` - Returns a Header*. This reads the 3 word header of a custom made RGBA file, and returns it as an object that can be attributed to a Texture object.
 ##### <a name="preloadInstructions">```filesystem::Texture* preload(filesystem::preloaded_animations animation)```</a> - Returns a Texture*. This Texture* can be used in conjunction with the preload graphics display functions to draw a texture. In order to use this function, you must declare a filesystem::preloaded_animations type, you must create an entry for the preloaded texture within the preloaded.hpp file, and lastly you must add a condition case in ```graphics::draw_texture_preloaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY)``` with the format ```if(texture->preloaded == filesystem::preloaded_animations) animation_to_draw = preloaded::animation;```.
 ##### ```filesystem::Header* readHeader(SceUID file)``` - Returns a Header*. This reads the 3 word header of a custom made RGBA file, and returns it as an object that can be attributed to a Texture object.
-##### ```void preloadTiles()``` - This function will assign the [game::tiles](#gameTilesM) member of the game namespace to a static pointer of an array containing [```Texture*```](#textureClassObject).
+##### <a name="preloadTilesF">```void preloadTiles()```</a> - This function will assign the [```tiles```](#gameTilesM) member of the game namespace to a static pointer of an array containing [```Texture*```](#textureClassObject).
 
 
 ### <a name="fontF">font</a>
@@ -123,11 +123,12 @@ Documentation
 ##### ```unsigned char msx_font``` - An MSX stylized font set.
 ##### ```unsigned char bitmapFont``` - Not interactable with current project. May be used in Vita2d, though.
 ### <a name="gameM">game</a>
+##### ```unsigned int tileSize``` - Unsigned integer representing the size of every tile.
 ##### ```unsigned int PLAYER_HEIGHT``` - Represents the height of the player in the game, typically a constant.
 ##### ```unsigned int PLAYER_WIDTH``` - Represents the height of the player in the game, typically a constant.
 ##### ```double PLAYER_BASE_MOVE_SPEED``` - Represents the base movement speed of the player in the game.
 ##### ```double PLAYER_MAX_MOVE_SPEED``` - Represents the maximum allowed movement speed of the player in the game.
-##### ```double PLAYER_CURRENT_MAX_MOVE_SPEED``` - Represents the current maximum allowed movement speed of the player in the game. As this may change during the game, power-ups, etc..
+##### ```double PLAYER_CURRENT_MAX_MOVE_SPEED``` - Represents the current maximum allowed movement speed of the player in the game. As this may change diuring the game, power-ups, etc..
 ##### ```double SPEED_MODIFIER``` - Represents a modifier that may affect the speed of a player (different terrain, etc.).
 ##### ```double FRICTION``` - Represents a modifier for friction that affects the speed of a player.
 ##### ```int MAX_AXIS_VALUE``` - Represents the maximum value that the joysticks may reach.
@@ -138,11 +139,13 @@ Documentation
 > * ```IDLE``` - Represents a movestate in which the player is not moving.
 > * ```MOVING_RIGHT``` - Represents a gamestate in which the player is moving to the right.
 > * ```MOVING_LEFT``` - Represents a gamestate in which the player is moving to the left.
-
+##### ```tileVals``` - Enumerated type representing the values pertinent to tiles. Values are currently 
+> * ```tileCount``` - Represents the total amount of tiles in the [tile member of the preloaded namespace](#tilesM).
 ##### ```gamestate state``` - Represents the current state of the game.
 ##### ```filesystem::Texture* rightrun``` - Preloaded texture for the rightrun animation.
 ##### ```filesystem::Texture* leftrun``` - Preloaded texture for the leftrun animation.
 ##### ```filesystem::Texture* idle``` - Preloaded texture for the idle animation.
+##### <a name = "gameTilesM">```filesystem::Texture** tiles``` </a> - [Texture](#textureClassObject)** containing an array of [Texture](#textureClassObject]* containing all preloaded tiles. Must [preload tiles](#preloadTilesF) first.
 ##### ```signed char lx``` - Signed character representing the left analog X value.
 ##### ```signed char ly``` - Signed character representing the left analog Y value.
 ##### ```signed char rx``` - Signed character representing the right analog X value.
@@ -161,7 +164,7 @@ Documentation
 ##### ```unsigned char idle``` - Array containing all RGBA values for the preloaded idle image.
 ##### ```unsigned char rightrun``` - Array containing all RGBA values for the preloaded rightrun image.
 ##### ```unsigned char leftrun``` - Array containing all RGBA values for the preloaded leftrun image.
-##### ```unsigned char tile``` - Two dimensional array containing all RGBA values for all preloaded tiles.
+##### <a name = "tilesM">```unsigned char tile``` </a> - Two dimensional array containing all RGBA values for all preloaded tiles.
 ### <a name="utilsM">utils</a>
 ##### ```unsigned char* fontStyle``` - The current fontStyle to be used in the project. (note: automatically set in utils.cpp)
 ---
