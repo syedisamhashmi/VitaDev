@@ -44,7 +44,7 @@ Documentation
 ### <a name="colorsF">colors</a>
 ##### ``` uint32_t RGBA832(unsigned char r, unsigned char g, unsigned char b, unsigned char a)``` - Generates a 32 bit formatted RGBA color.
 ##### ```uint16_t RGB16(unsigned char r, unsigned char g, unsigned char b)``` - Generates a 16 bit formatted RGB color, no alpha.
-##### ```uint32_t pixelToRGBA832(filesystem::pixel p)``` - Generates a 32 bit formatted RGBA color from a provided <a name="pixelC">```filesystem::pixel```</a>.
+##### ```uint32_t pixelToRGBA832(filesystem::pixel p)``` - Generates a 32 bit formatted RGBA color from a provided [```filesystem::pixel```](#pixelC).
 ### <a name="filesystemF">filesystem</a>
 ##### ```filesystem::Texture* loadFile(std::string filename)``` - Returns a Texture*. The pixels** of the Texture* contains all RGBA values of the texture loaded and the texture is formatted to width and height of the corresponding rgba file.
 ##### ```filesystem::Header* readHeader(SceUID file)``` - Returns a Header*. This reads the 3 word header of a custom made RGBA file, and returns it as an object that can be attributed to a Texture object.
