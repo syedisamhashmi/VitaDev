@@ -20,8 +20,6 @@ namespace filesystem
     typedef enum {NOT_PRELOADED, IDLE_ANIMATION,  RIGHT_RUN_ANIMATION, LEFT_RUN_ANIMATION} preloaded_animations;
     
     
-    
-    
     class Header
     {
         public:
@@ -64,6 +62,8 @@ namespace filesystem
     int read(SceSize args, void* argp);
     filesystem::Header* readHeader(SceUID file);
     filesystem::Texture* preload(filesystem::preloaded_animations animation);
+    
+    void preloadTiles();   
 }
 
 

@@ -199,10 +199,35 @@ namespace filesystem
                 temp->header.width = width;
                 temp->header.states = states;
             }
-            
         }
         
         return temp;
+    }
+    
+    void preloadTiles()
+    {
+        static filesystem::Texture* temp[game::tileCount];
+        for(int x = 0; x < game::tileCount; x++)
+        {
+            filesystem::Texture* tile = new filesystem::Texture(game::tileSize,game::tileSize,1);
+            for(int pixelCountY = 0; pixelCountY < game::tileSize; pixelCountY+=1)
+            {
+                int pixelY4 = pixelCountY * game::tileSize * 4;
+                for(int pixelCountX = 0; pixelCountX < game::tileSize; pixelCountX+=1)
+                {
+                    int pixelX4 = pixelCountX*4;
+                    int sum = pixelY4 + pixelX4;
+                    tile->pixels[pixelCountY][pixelCountX].red = preloaded::tile[x][sum];
+                    tile->pixels[pixelCountY][pixelCountX].green = preloaded::tile[x][sum+1];
+                    tile->pixels[pixelCountY][pixelCountX].blue = preloaded::tile[x][sum+2];
+                    tile->pixels[pixelCountY][pixelCountX].alpha = preloaded::tile[x][sum+3];
+                }
+            }
+            temp[x] = tile;
+        }
+
+        
+        game::tiles = temp;
     }
     
     
