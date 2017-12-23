@@ -156,6 +156,7 @@ Documentation
 ##### ```unsigned char idle``` - Array containing all RGBA values for the preloaded idle image.
 ##### ```unsigned char rightrun``` - Array containing all RGBA values for the preloaded rightrun image.
 ##### ```unsigned char leftrun``` - Array containing all RGBA values for the preloaded leftrun image.
+##### ```unsigned char tile``` - Two dimensional array containing all RGBA values for all preloaded tiles.
 ### <a name="utilsM">utils</a>
 ##### ```unsigned char* fontStyle``` - The current fontStyle to be used in the project. (note: automatically set in utils.cpp)
 ---
