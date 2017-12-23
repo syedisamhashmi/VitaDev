@@ -16,7 +16,7 @@
 
 namespace game
 {
-    
+    unsigned int tileSize = 32; //Each tile is a 32x32 square.  
     unsigned int PLAYER_HEIGHT = 43;
     unsigned int PLAYER_WIDTH = 35;
     double PLAYER_BASE_MOVE_SPEED = 5;
@@ -29,6 +29,8 @@ namespace game
     filesystem::Texture* rightrun = filesystem::preload(filesystem::RIGHT_RUN_ANIMATION);
     filesystem::Texture* leftrun = filesystem::preload(filesystem::LEFT_RUN_ANIMATION);
     filesystem::Texture* idle = filesystem::preload(filesystem::IDLE_ANIMATION);
+    
+    filesystem::Texture** tiles;
     
     signed char lx; //Left analog X
     signed char ly; //Left analog Y

@@ -13,6 +13,8 @@
 
 namespace game
 {
+    extern unsigned int tileSize;
+    
     extern unsigned int PLAYER_HEIGHT;
     extern unsigned int PLAYER_WIDTH;
     extern double PLAYER_BASE_MOVE_SPEED;
@@ -23,13 +25,13 @@ namespace game
     extern int MAX_AXIS_VALUE;
     typedef enum  {PAUSED, UNPAUSED} gamestate;
     typedef enum  {IDLE, MOVING_RIGHT, MOVING_LEFT} Movestate;
-    
+    typedef enum {tileCount = 1} tileVals;
     extern gamestate state;
     
     extern filesystem::Texture* rightrun;
     extern filesystem::Texture* leftrun;
     extern filesystem::Texture* idle;
-    
+    extern filesystem::Texture** tiles;
     
     
     extern signed char lx; //Left analog X
