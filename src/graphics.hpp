@@ -64,6 +64,9 @@ namespace graphics
     void draw_texture_preloaded_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int pieceNum); //Draw a piece of a preloaded texture.
     void draw_texture_preloaded_scale_part(filesystem::Texture* texture, unsigned int posX, unsigned int posY, unsigned int heightPerPiece, unsigned int widthPerPiece, unsigned int newHeightScale, unsigned int newWidthScale, unsigned int pieceNum); //Draw a part of a preloaded texture to be scaled.
     
+    void draw_tile(unsigned int tileNum, unsigned int x, unsigned int y); //Draw a preloaded tile.
+    
+    
     game::Position checkBounds(int posX, int posY, unsigned int x, unsigned int y);
 }
 
