@@ -50,7 +50,7 @@ Documentation
 ##### ```filesystem::Header* readHeader(SceUID file)``` - Returns a Header*. This reads the 3 word header of a custom made RGBA file, and returns it as an object that can be attributed to a Texture object.
 ##### <a name="preloadInstructions">```filesystem::Texture* preload(filesystem::preloaded_animations animation)```</a> - Returns a Texture*. This Texture* can be used in conjunction with the preload graphics display functions to draw a texture. In order to use this function, you must declare a filesystem::preloaded_animations type, you must create an entry for the preloaded texture within the preloaded.hpp file, and lastly you must add a condition case in ```graphics::draw_texture_preloaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY)``` with the format ```if(texture->preloaded == filesystem::preloaded_animations) animation_to_draw = preloaded::animation;```.
 ##### ```filesystem::Header* readHeader(SceUID file)``` - Returns a Header*. This reads the 3 word header of a custom made RGBA file, and returns it as an object that can be attributed to a Texture object.
-##### <a name="preloadTilesF">```void preloadTiles()```</a> - This function will assign the [tiles](#gameTilesM) member of the game namespace to a static pointer of an array containing [```Texture*```](#textureClassObject).
+##### <a name="preloadTilesF">```void preloadTiles()```</a> - This function will assign the [```tiles```](#gameTilesM) member of the game namespace to a static pointer of an array containing [```Texture*```](#textureClassObject).
 
 
 ### <a name="fontF">font</a>
@@ -145,7 +145,7 @@ Documentation
 ##### ```filesystem::Texture* rightrun``` - Preloaded texture for the rightrun animation.
 ##### ```filesystem::Texture* leftrun``` - Preloaded texture for the leftrun animation.
 ##### ```filesystem::Texture* idle``` - Preloaded texture for the idle animation.
-##### ```filesystem::Texture** tiles``` - [Texture](#textureClassObject)** containing an array of [Texture](#textureClassObject]* containing all preloaded tiles. Must [preload tiles](#preloadTilesF) first.
+##### <a name = "gameTilesM">```filesystem::Texture** tiles``` </a> - [Texture](#textureClassObject)** containing an array of [Texture](#textureClassObject]* containing all preloaded tiles. Must [preload tiles](#preloadTilesF) first.
 ##### ```signed char lx``` - Signed character representing the left analog X value.
 ##### ```signed char ly``` - Signed character representing the left analog Y value.
 ##### ```signed char rx``` - Signed character representing the right analog X value.
