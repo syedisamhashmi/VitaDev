@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     filesystem::preloadTiles();
     
     game::player = game::Player();
-
+    game::camera = game::Camera(0,graphics::SCREEN_H);
     
     
     
@@ -52,38 +52,25 @@ int main(int argc, char *argv[])
 
         
         uint32_t pixelsSaved[100][100];
-        for(unsigned int x = 20; x <  80; x++)
-        {
-            for(unsigned int y = 250; y < 320; y++)
-            {
-                
-                if( (int)(framecount/5)%3 == 0)
-                {
-                    if(y%10 < 5)
-                        pixelsSaved[x][y] = graphics::getPixel(x+1+((int)(framecount/5)%3),y);
-                    else
-                        pixelsSaved[x][y] = graphics::getPixel(x-1-((int)(framecount/5)%3),y);
-                }
-                else
-                {
-                    if(y%10 < 5)
-                        pixelsSaved[x][y] = graphics::getPixel(x-((int)(framecount/5)%3),y);
-                    else
-                        pixelsSaved[x][y] = graphics::getPixel(x+((int)(framecount/5)%3),y);
-                }
-                pixelsSaved[x][y] ^=  0x00FF0000;
-            }
-        }
-        for(unsigned int x = 20; x <  80; x++)
-        {
-            for(unsigned int y = 250; y < 320; y++)
-            {
-                graphics::draw_pixel(x,y, pixelsSaved[x][y]);
-            }
-        }
-     
         
-        graphics::draw_tile(0, 400,300);
+        
+        
+        
+//        for(int x = 0; x < 30; x++)
+//        {
+//            for(int y = 4; y < 15; y++)
+//            {
+//                if((x*32) + 32 <= graphics::SCREEN_W)
+//                {
+//                    if((y*32) + 32 <= graphics::SCREEN_H)
+//                    {
+//                        graphics::draw_tile(preloaded::maps[0][x][y], x*32,y*32);
+//                    }
+//                }
+//            }
+//        }
+        
+        //graphics::draw_tile(1, 500,300);
         
         
         
@@ -104,3 +91,38 @@ int main(int argc, char *argv[])
 }
 
 
+
+
+
+//Water test
+/*
+ for(unsigned int x = 20; x <  80; x++)
+ {
+ for(unsigned int y = 250; y < 320; y++)
+ {
+ 
+ if( (int)(framecount/5)%3 == 0)
+ {
+ if(y%10 < 5)
+ pixelsSaved[x][y] = graphics::getPixel(x+1+((int)(framecount/5)%3),y);
+ else
+ pixelsSaved[x][y] = graphics::getPixel(x-1-((int)(framecount/5)%3),y);
+ }
+ else
+ {
+ if(y%10 < 5)
+ pixelsSaved[x][y] = graphics::getPixel(x-((int)(framecount/5)%3),y);
+ else
+ pixelsSaved[x][y] = graphics::getPixel(x+((int)(framecount/5)%3),y);
+ }
+ pixelsSaved[x][y] ^=  0x00FF0000;
+ }
+ }
+ for(unsigned int x = 20; x <  80; x++)
+ {
+ for(unsigned int y = 250; y < 320; y++)
+ {
+ graphics::draw_pixel(x,y, pixelsSaved[x][y]);
+ }
+ }
+ */
