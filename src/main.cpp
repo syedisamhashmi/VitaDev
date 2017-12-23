@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
     graphics::initializeFramebuffers(); //Selfmade
     
     
+    filesystem::preloadTiles();
     
     game::player = game::Player();
 
@@ -48,60 +49,44 @@ int main(int argc, char *argv[])
         game::checkInput(io::pad); //Interpret Input
         
         game::drawPlayer();
-        bool forward = true;
-//        if(framecount % 100 < 50)
-//        {
-            uint32_t pixelsSaved[100][100];
-            int offset = 0;
-            for(unsigned int x = 20; x <  80; x++)
-            {
-                
-                for(unsigned int y = 250; y < 320; y++)
-                {
-                    
-                    if( (int)(framecount/5)%3 == 0)
-                    {
-                        if(y%10 < 5)
-                            pixelsSaved[x][y] = graphics::getPixel(x+1+((int)(framecount/5)%3),y);
-                        else
-                            pixelsSaved[x][y] = graphics::getPixel(x-1-((int)(framecount/5)%3),y);
-                    }
-                    else
-                    {
-                    
-                        if(y%10 < 5)
-                            pixelsSaved[x][y] = graphics::getPixel(x-((int)(framecount/5)%3),y);
-                        else
-                            pixelsSaved[x][y] = graphics::getPixel(x+((int)(framecount/5)%3),y);
-                    }
-              
-                
-                    pixelsSaved[x][y] ^=  0x00FF0000;
-                    
-                }
 
-            }
+        
+        uint32_t pixelsSaved[100][100];
         for(unsigned int x = 20; x <  80; x++)
         {
-            
             for(unsigned int y = 250; y < 320; y++)
             {
-                //pixelsSaved[x][y] = graphics::getPixel(x,y);
                 
-
-                graphics::draw_pixel(x,y, pixelsSaved[x][y]);
-            
+                if( (int)(framecount/5)%3 == 0)
+                {
+                    if(y%10 < 5)
+                        pixelsSaved[x][y] = graphics::getPixel(x+1+((int)(framecount/5)%3),y);
+                    else
+                        pixelsSaved[x][y] = graphics::getPixel(x-1-((int)(framecount/5)%3),y);
+                }
+                else
+                {
+                    if(y%10 < 5)
+                        pixelsSaved[x][y] = graphics::getPixel(x-((int)(framecount/5)%3),y);
+                    else
+                        pixelsSaved[x][y] = graphics::getPixel(x+((int)(framecount/5)%3),y);
+                }
+                pixelsSaved[x][y] ^=  0x00FF0000;
             }
-            
         }
-//        }
-    
+        for(unsigned int x = 20; x <  80; x++)
+        {
+            for(unsigned int y = 250; y < 320; y++)
+            {
+                graphics::draw_pixel(x,y, pixelsSaved[x][y]);
+            }
+        }
+     
+        
+        graphics::draw_tile(0, 400,300);
         
         
         
-      
-        
-       
         utils::printsf(10, 20, colors::WHITE32, "pos x: %d, y: %d", game::player.position.x, game::player.position.y); //Print out frame number.
         utils::printsf(10, 50, colors::WHITE32, "lx x: %d,", io::pad.lx); //Print out left-axis value.
         
