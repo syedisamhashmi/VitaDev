@@ -9,12 +9,14 @@
 #ifndef COLORS_H
 #define COLORS_H
 #include <cstdint>
+#include "filesystem.hpp"
 namespace colors
 {
     uint32_t RGBA832(unsigned char r, unsigned char g,
                      unsigned char b, unsigned char a);
     uint16_t RGB16(unsigned char r, unsigned char g, unsigned char b);
     
+    uint32_t pixelToRGBA832(filesystem::pixel p);
     extern uint32_t RED32;
     extern uint32_t GREEN32;
     extern uint32_t BLUE32;

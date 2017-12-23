@@ -21,6 +21,13 @@ namespace colors
         return ( ( ((r)&0x1F)<<11) | (((g)&0x3F)<<5) | (((b)&0x1F)<<0) );
     };
     
+    uint32_t pixelToRGBA832(filesystem::pixel p)
+    {
+        
+        return ( (((p.alpha)&0xFF)<<24) | (((p.blue)&0xFF)<<16) |
+                (((p.green)&0xFF)<<8) | (((p.red)&0xFF)<<0) );
+    }
+    
     uint32_t RED32 =  RGBA832(255, 0,   0,   255);
     uint32_t GREEN32 = RGBA832(0,   255, 0,   255);
     uint32_t BLUE32 =  RGBA832(0,   0,   255, 255);
