@@ -38,6 +38,8 @@ namespace game
     signed char ry; //Right analog Y
     
     Player player;
+    Camera camera;
+    
     
     Entity::Entity()
     {
@@ -60,6 +62,15 @@ namespace game
         this->x = x;
         this->y = y;
     }
+    
+    Player::Player()
+    {
+        this->position.x = (graphics::SCREEN_W/2) - game::PLAYER_WIDTH/2;
+        this->position.y = (graphics::SCREEN_H/2) - game::PLAYER_HEIGHT/2;
+        this->movestate = IDLE;
+         this->previousMovestate = IDLE;
+    };
+    
     
     void checkInput(SceCtrlData pad)
     {
@@ -98,24 +109,40 @@ namespace game
         double deltaFrame = utils::abs(game::player.velocity.x) / game::PLAYER_MAX_MOVE_SPEED;
         game::player.animationFrame = game::player.animationFrame + deltaFrame;
         
-        if(game::player.movestate != game::player.previousMovestate)
+        if(game::player.position.x > game::camera.position.x
+           && game::player.position.x < game::camera.position.x + graphics::SCREEN_W
+           && game::player.position.y < game::camera.position.y
+           && game::player.position.y > game::camera.position.y - graphics::SCREEN_H)
         {
-            game::player.animationFrame = 0;
-        }
-        if(game::player.position.x > game::player.lastPosition.x)
-        {
-            game::player.movestate = MOVING_RIGHT;
-            graphics::draw_texture_preloaded_scale_part(game::rightrun, game::player.position.x , game::player.position.y, game::PLAYER_HEIGHT, game::PLAYER_WIDTH,2,2, (int)game::player.animationFrame);
-        }
-        else if(game::player.position.x == game::player.lastPosition.x)
-        {
-            game::player.movestate = IDLE;
-            graphics::draw_texture_preloaded_scale_part(game::idle, game::player.position.x , game::player.position.y, 48, 24 ,2,2, (int)game::player.animationFrame); //Idle has special height and width
-        }
-        else if(game::player.position.x < game::player.lastPosition.x)
-        {
-            game::player.movestate = MOVING_LEFT;
-            graphics::draw_texture_preloaded_scale_part(game::leftrun, game::player.position.x, game::player.position.y, game::PLAYER_HEIGHT, game::PLAYER_WIDTH,2,2, (int)game::player.animationFrame);
+            if(game::player.position.x > game::camera.position.x + (graphics::SCREEN_W/2) - game::PLAYER_WIDTH/2)
+            {
+                game::camera.position.x += utils::abs(game::player.position.x - game::player.lastPosition.x);
+            }
+            
+            if(game::player.position.x < game::camera.position.x + (graphics::SCREEN_W/2) - game::PLAYER_WIDTH/2)
+            {
+                game::camera.position.x -= utils::abs(game::player.position.x - game::player.lastPosition.x);
+            }
+            
+            if(game::player.movestate != game::player.previousMovestate)
+            {
+                game::player.animationFrame = 0;
+            }
+            if(game::player.position.x > game::player.lastPosition.x)
+            {
+                game::player.movestate = MOVING_RIGHT;
+                graphics::draw_texture_preloaded_scale_part(game::rightrun, game::player.position.x - game::camera.position.x , game::camera.position.y - game::player.position.y, game::PLAYER_HEIGHT, game::PLAYER_WIDTH,2,2, (int)game::player.animationFrame);
+            }
+            else if(game::player.position.x == game::player.lastPosition.x)
+            {
+                game::player.movestate = IDLE;
+                graphics::draw_texture_preloaded_scale_part(game::idle, game::player.position.x - game::camera.position.x , game::camera.position.y - game::player.position.y , 48, 24 ,2,2, (int)game::player.animationFrame); //Idle has special height and width
+            }
+            else if(game::player.position.x < game::player.lastPosition.x)
+            {
+                game::player.movestate = MOVING_LEFT;
+                graphics::draw_texture_preloaded_scale_part(game::leftrun, game::player.position.x - game::camera.position.x , game::camera.position.y - game::player.position.y, game::PLAYER_HEIGHT, game::PLAYER_WIDTH,2,2, (int)game::player.animationFrame);
+            }
         }
 
         

@@ -13,8 +13,8 @@
 
 namespace game
 {
-    extern unsigned int tileSize;
     
+    extern unsigned int tileSize;
     extern unsigned int PLAYER_HEIGHT;
     extern unsigned int PLAYER_WIDTH;
     extern double PLAYER_BASE_MOVE_SPEED;
@@ -25,7 +25,7 @@ namespace game
     extern int MAX_AXIS_VALUE;
     typedef enum  {PAUSED, UNPAUSED} gamestate;
     typedef enum  {IDLE, MOVING_RIGHT, MOVING_LEFT} Movestate;
-    typedef enum {tileCount = 1} tileVals;
+    typedef enum {tileCount = 2} tileVals;
     extern gamestate state;
     
     extern filesystem::Texture* rightrun;
@@ -82,23 +82,28 @@ namespace game
             unsigned int health;
             unsigned int missiles;
             Velocity velocity;
-            Player()
-            {
-                this->movestate = IDLE;
-                this->previousMovestate = IDLE;
-            }
+            Player();
     };
-    
-    extern Player player;
     
     class Camera
     {
         public:
-            Camera();
-            Camera(int x, int y);
+            Camera()
+            {
+                this->position.x = 0;
+                this->position.y = 0;
+            }
+            Camera(int x, int y)
+            {
+                this->position.x = x;
+                this->position.y = y;
+            }
             Position position;
     };
     
+    
+    extern Player player;
+    extern Camera camera;
     
     void drawPlayer();
     void checkInput(SceCtrlData pad);

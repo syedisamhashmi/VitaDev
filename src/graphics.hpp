@@ -14,8 +14,8 @@
 namespace graphics
 {
     
-    static int SCREEN_W = 960;
-    static int SCREEN_H = 544;
+    static int SCREEN_W = 960; // Block size of 32, can display 30 blocks across.
+    static int SCREEN_H = 544; // Block size of 32, can display 17 blocks tall.
     static int DISPLAY_STRIDE_IN_PIXELS = 1024;
     
     
