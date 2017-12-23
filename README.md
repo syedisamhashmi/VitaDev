@@ -50,6 +50,9 @@ Documentation
 ##### ```filesystem::Header* readHeader(SceUID file)``` - Returns a Header*. This reads the 3 word header of a custom made RGBA file, and returns it as an object that can be attributed to a Texture object.
 ##### <a name="preloadInstructions">```filesystem::Texture* preload(filesystem::preloaded_animations animation)```</a> - Returns a Texture*. This Texture* can be used in conjunction with the preload graphics display functions to draw a texture. In order to use this function, you must declare a filesystem::preloaded_animations type, you must create an entry for the preloaded texture within the preloaded.hpp file, and lastly you must add a condition case in ```graphics::draw_texture_preloaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY)``` with the format ```if(texture->preloaded == filesystem::preloaded_animations) animation_to_draw = preloaded::animation;```.
 ##### ```filesystem::Header* readHeader(SceUID file)``` - Returns a Header*. This reads the 3 word header of a custom made RGBA file, and returns it as an object that can be attributed to a Texture object.
+##### ```void preloadTiles()``` - This function will assign the [game::tiles](#gameTilesM) member of the game namespace to a static pointer of an array containing [```Texture*```](#textureClassObject).
+
+
 ### <a name="fontF">font</a>
 ##### No functions.
 ### <a name="gameF">game</a>
