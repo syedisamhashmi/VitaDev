@@ -173,7 +173,7 @@ Documentation
 > * ```unsigned int width``` - Represents the width in pixels for the Texture in which the header will reside in.
 > * ```unsigned int states``` - Represents the states for the Texture in which the header will reside in.
 
-##### <a name="pixelC>```pixel```</a> - Class containing all the necessary information of a pixel.
+##### <a name="pixelC">```pixel```</a> - Class containing all the necessary information of a pixel.
 > * ```pixel(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha)``` - Constructor to create a pixel with the specified red, green, blue, and alpha.
 > * ```pixel()``` - Constructor to create a pixel with the red, green, blue, and alpha set to zero.
 > * ```unsigned char red``` - Represents the red value of the pixel.
