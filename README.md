@@ -44,7 +44,7 @@ Documentation
 ### <a name="colorsF">colors</a>
 ##### ``` uint32_t RGBA832(unsigned char r, unsigned char g, unsigned char b, unsigned char a)``` - Generates a 32 bit formatted RGBA color.
 ##### ```uint16_t RGB16(unsigned char r, unsigned char g, unsigned char b)``` - Generates a 16 bit formatted RGB color, no alpha.
-##### ```uint32_t pixelToRGBA832(filesystem::pixel p)``` - Generates a 32 bit formatted RGBA color from a provided filesystem::pixel.
+##### ```uint32_t pixelToRGBA832(filesystem::pixel p)``` - Generates a 32 bit formatted RGBA color from a provided <a name="pixelC">```filesystem::pixel```</a>.
 ### <a name="filesystemF">filesystem</a>
 ##### ```filesystem::Texture* loadFile(std::string filename)``` - Returns a Texture*. The pixels** of the Texture* contains all RGBA values of the texture loaded and the texture is formatted to width and height of the corresponding rgba file.
 ##### ```filesystem::Header* readHeader(SceUID file)``` - Returns a Header*. This reads the 3 word header of a custom made RGBA file, and returns it as an object that can be attributed to a Texture object.
@@ -173,7 +173,7 @@ Documentation
 > * ```unsigned int width``` - Represents the width in pixels for the Texture in which the header will reside in.
 > * ```unsigned int states``` - Represents the states for the Texture in which the header will reside in.
 
-##### ```pixel``` - Class containing all the necessary information of a pixel.
+##### <a name="pixelC>```pixel```</a> - Class containing all the necessary information of a pixel.
 > * ```pixel(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha)``` - Constructor to create a pixel with the specified red, green, blue, and alpha.
 > * ```pixel()``` - Constructor to create a pixel with the red, green, blue, and alpha set to zero.
 > * ```unsigned char red``` - Represents the red value of the pixel.
