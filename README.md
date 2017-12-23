@@ -140,7 +140,7 @@ Documentation
 > * ```MOVING_RIGHT``` - Represents a gamestate in which the player is moving to the right.
 > * ```MOVING_LEFT``` - Represents a gamestate in which the player is moving to the left.
 ##### ```tileVals``` - Enumerated type representing the values pertinent to tiles. Values are currently 
-> * ```tileCount``` - Represents the total amount of tiles in the [tile member of the preloaded namespace](#tileM).
+> * ```tileCount``` - Represents the total amount of tiles in the [tile member of the preloaded namespace](#tilesM).
 ##### ```gamestate state``` - Represents the current state of the game.
 ##### ```filesystem::Texture* rightrun``` - Preloaded texture for the rightrun animation.
 ##### ```filesystem::Texture* leftrun``` - Preloaded texture for the leftrun animation.
