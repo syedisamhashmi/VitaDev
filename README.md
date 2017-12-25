@@ -226,6 +226,7 @@ Documentation
 > * ```unsigned int missiles``` - The current amount of missiles the player has.
 > * ```Velocity velocity``` - The current velocity of the player.
 > * ```Player()``` - Creates a new Player object that has an IDLE movestate and a previous movestate of IDLE as well.
+> * ```Player(int x, int y)``` - Creates a new Player object that has an IDLE movestate and a previous movestate of IDLE as well at the specified x and y position.
 
 ##### ```Camera``` - Class containing information for the camera.
 > * ```Position positon``` - The position of the camera.
