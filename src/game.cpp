@@ -114,16 +114,26 @@ namespace game
            && game::player.position.y < game::camera.position.y
            && game::player.position.y > game::camera.position.y - graphics::SCREEN_H)
         {
-            if(game::player.position.x > game::camera.position.x + (graphics::SCREEN_W/2) - game::PLAYER_WIDTH/2)
+            if(game::player.position.x > (game::camera.position.x + (graphics::SCREEN_W/2) - game::PLAYER_WIDTH/2 + 30))
             {
-                game::camera.position.x += utils::abs(game::player.position.x - game::player.lastPosition.x);
+                if(player.velocity.x > 0)
+                    game::camera.position.x += (game::player.position.x - game::player.lastPosition.x);
+                else
+                    game::camera.position.x -= (game::player.position.x - game::player.lastPosition.x);
             }
-            
-            if(game::player.position.x < game::camera.position.x + (graphics::SCREEN_W/2) - game::PLAYER_WIDTH/2)
+            else if(game::player.position.x < (game::camera.position.x + (graphics::SCREEN_W/2) - game::PLAYER_WIDTH/2 - 30))
             {
-                game::camera.position.x -= utils::abs(game::player.position.x - game::player.lastPosition.x);
+                
+                if(player.velocity.x > 0)
+                {
+                    game::camera.position.x -= (game::player.position.x - game::player.lastPosition.x);
+                   
+                }
+                else
+                    game::camera.position.x += (game::player.position.x - game::player.lastPosition.x);
             }
-            
+            if(game::camera.position.x < 0)
+                game::camera.position.x = 0;
             if(game::player.movestate != game::player.previousMovestate)
             {
                 game::player.animationFrame = 0;
