@@ -134,14 +134,17 @@ Documentation
 ##### ```double FRICTION``` - Represents a modifier for friction that affects the speed of a player.
 ##### ```int MAX_AXIS_VALUE``` - Represents the maximum value that the joysticks may reach.
 ##### ```gamestate``` - Enumerated type representing the possible states of the game. Values are currently
-##### > * ```PAUSED``` - Represents a gamestate in which the game is currently paused.
-##### > * ```UNPAUSED``` - Represents a gamestate in which the game is currently unpaused.
+> * ```PAUSED``` - Represents a gamestate in which the game is currently paused.
+> * ```UNPAUSED``` - Represents a gamestate in which the game is currently unpaused.
+
 ##### ```movestate``` - Enumerated type representing the possible movestates of the player. Values are currently 
 > * ```IDLE``` - Represents a movestate in which the player is not moving.
 > * ```MOVING_RIGHT``` - Represents a gamestate in which the player is moving to the right.
 > * ```MOVING_LEFT``` - Represents a gamestate in which the player is moving to the left.
+
 ##### ```tileVals``` - Enumerated type representing the values pertinent to tiles. Values are currently 
 > * ```tileCount``` - Represents the total amount of tiles in the [tile member of the preloaded namespace](#tilesM).
+
 ##### ```gamestate state``` - Represents the current state of the game.
 ##### ```filesystem::Texture* rightrun``` - Preloaded texture for the rightrun animation.
 ##### ```filesystem::Texture* leftrun``` - Preloaded texture for the leftrun animation.
