@@ -549,18 +549,24 @@ namespace graphics
     
     void draw_tile(unsigned int tileNum, unsigned int x, unsigned int y) //Draw a preloaded tile.
     {
-        for(int yPixel = 0; yPixel < game::tileSize; yPixel++)
+        
+        for(unsigned int yPixel = 0; yPixel < game::tileSize; yPixel++)
         {
-            for(int xPixel = 0; xPixel < game::tileSize; xPixel++)
+            for(unsigned int xPixel = 0; xPixel < game::tileSize; xPixel++)
             {
                 uint32_t colorOfPixel = 0;
                 if( (game::tiles[tileNum]->pixels[yPixel][xPixel]).alpha != 0)
                 {
                     colorOfPixel = colors::pixelToRGBA832((game::tiles[tileNum]->pixels[yPixel][xPixel]));
-                    draw_pixel(x+xPixel, y+yPixel, colorOfPixel);
+                  
+                    if(x+xPixel > game::camera.position.x && x + xPixel < game::camera.position.x + graphics::SCREEN_W)
+                    {
+                        draw_pixel(x+xPixel - game::camera.position.x, y+yPixel, colorOfPixel);
+                    }
                 }
             }
         }
+        
         
     }
     

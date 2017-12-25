@@ -51,30 +51,36 @@ int main(int argc, char *argv[])
         game::drawPlayer();
 
         
-        uint32_t pixelsSaved[100][100];
+       // uint32_t pixelsSaved[100][100];
         
         
         
         
-//        for(int x = 0; x < 30; x++)
-//        {
-//            for(int y = 4; y < 15; y++)
-//            {
-//                if((x*32) + 32 <= graphics::SCREEN_W)
-//                {
-//                    if((y*32) + 32 <= graphics::SCREEN_H)
-//                    {
-//                        graphics::draw_tile(preloaded::maps[0][x][y], x*32,y*32);
-//                    }
-//                }
-//            }
-//        }
+        for(int x = 0; x < 30; x++)
+        {
+            for(int y = 4; y < 15; y++)
+            {
+                if(preloaded::maps[0][x][y] != 0)
+                {
+                   if((x*32) + 32 <= graphics::SCREEN_W)
+                    {
+                        if((y*32) + 32 <= graphics::SCREEN_H)
+                        {
+                            graphics::draw_tile(preloaded::maps[0][x][y], x*32,y*32);
+                        }
+                    }
+                }
+            }
+        }
         
-        //graphics::draw_tile(1, 500,300);
+//        graphics::draw_tile(1, 500,300);
+//        graphics::draw_tile(1, 1000,300);
         
         
+        utils::printsf(10, 20, colors::WHITE32, "pos x: %u, y: %u", game::player.position.x, game::player.position.y); //Print out frame number.
         
-        utils::printsf(10, 20, colors::WHITE32, "pos x: %d, y: %d", game::player.position.x, game::player.position.y); //Print out frame number.
+        utils::printsf(100, 50, colors::WHITE32, "pos x: %u, y: %u", game::camera.position.x, game::camera.position.y); //Print out frame number.
+        
         utils::printsf(10, 50, colors::WHITE32, "lx x: %d,", io::pad.lx); //Print out left-axis value.
         
     
