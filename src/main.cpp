@@ -77,9 +77,7 @@ int main(int argc, char *argv[])
 //        graphics::draw_tile(1, 1000,300);
         
         
-        utils::printsf(10, 20, colors::WHITE32, "pos x: %u, y: %u", game::player.position.x, game::player.position.y); //Print out frame number.
-        
-        utils::printsf(100, 50, colors::WHITE32, "pos x: %u, y: %u", game::camera.position.x, game::camera.position.y); //Print out frame number.
+        utils::printsf(10, 20, colors::WHITE32, "pos x: %d, y: %d", game::player.position.x, game::player.position.y); //Print out player position.
         
         utils::printsf(10, 50, colors::WHITE32, "lx x: %d,", io::pad.lx); //Print out left-axis value.
         

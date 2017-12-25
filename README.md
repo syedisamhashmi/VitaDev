@@ -162,6 +162,8 @@ Documentation
 ##### ```SceCtrlData pad``` - Structure containing all the controls and their current states (pressed/unpressed).
 ##### ```SceTouchData touch``` - Structure containing the touchscreen and current screen touch information.
 ### <a name="preloadedM">preloaded</a>
+
+##### ```unsigned int maps[][100][100]``` - A three dimensional array of tiles and their positioning in a map. The first dimension is the map number, the second dimension is the X position of the tile, and the third dimension is the Y position of a tile. The value is the [tile number](#tilesM) to be rendered at that position.
 ##### ```unsigned char idle``` - Array containing all RGBA values for the preloaded idle image.
 ##### ```unsigned char rightrun``` - Array containing all RGBA values for the preloaded rightrun image.
 ##### ```unsigned char leftrun``` - Array containing all RGBA values for the preloaded leftrun image.
