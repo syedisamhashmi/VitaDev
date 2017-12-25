@@ -46,7 +46,7 @@ Documentation
 ##### ```uint16_t RGB16(unsigned char r, unsigned char g, unsigned char b)``` - Generates a 16 bit formatted RGB color, no alpha.
 ##### ```uint32_t pixelToRGBA832(filesystem::pixel p)``` - Generates a 32 bit formatted RGBA color from a provided [```filesystem::pixel```](#pixelC).
 ### <a name="filesystemF">filesystem</a>
-##### ```filesystem::Texture* loadFile(std::string filename)``` - Returns a Texture*. The pixels** of the Texture* contains all RGBA values of the texture loaded and the texture is formatted to width and height of the corresponding rgba file.
+##### ```filesystem::Texture* loadFile(std::string filename)``` - Returns a [Texture](#textureClassObject)*. The pixels** of the Texture* contains all RGBA values of the texture loaded and the texture is formatted to width and height of the corresponding rgba file.
 ##### ```filesystem::Header* readHeader(SceUID file)``` - Returns a Header*. This reads the 3 word header of a custom made RGBA file, and returns it as an object that can be attributed to a Texture object.
 ##### <a name="preloadInstructions">```filesystem::Texture* preload(filesystem::preloaded_animations animation)```</a> - Returns a Texture*. This Texture* can be used in conjunction with the preload graphics display functions to draw a texture. In order to use this function, you must declare a filesystem::preloaded_animations type, you must create an entry for the preloaded texture within the preloaded.hpp file, and lastly you must add a condition case in ```graphics::draw_texture_preloaded(filesystem::Texture* texture, unsigned int posX, unsigned int posY)``` with the format ```if(texture->preloaded == filesystem::preloaded_animations) animation_to_draw = preloaded::animation;```.
 ##### ```filesystem::Header* readHeader(SceUID file)``` - Returns a Header*. This reads the 3 word header of a custom made RGBA file, and returns it as an object that can be attributed to a Texture object.
@@ -178,12 +178,12 @@ Documentation
 ### <a name="colorsC">colors</a>
 ##### No classes.
 ### <a name="filesystemC">filesystem</a>
-##### <a name="headerClassObject">```Header```</a> - Class containing the header of a RGBA file for use in a [Texture](#textureClassObject) object
-> * ```Header(unsigned int height, unsigned int width, unsigned int states)``` - Constructor to create new Header with specified height, width, and states.
+##### <a name="headerClassObject">```Header```</a> - Class containing the [Header](#headerClassObject) of a RGBA file for use in a [Texture](#textureClassObject) object
+> * ```Header(unsigned int height, unsigned int width, unsigned int states)``` - Constructor to create new [Header](#headerClassObject) with specified height, width, and states.
 > * ```Header()``` - Constructor to create new Header with height, width, and states set to zero.
-> * ```unsigned int height``` - Represents the height in pixels for the Texture in which the header will reside in.
-> * ```unsigned int width``` - Represents the width in pixels for the Texture in which the header will reside in.
-> * ```unsigned int states``` - Represents the states for the Texture in which the header will reside in.
+> * ```unsigned int height``` - Represents the height in pixels for the [Texture](#textureClassObject) in which the [Header](#headerClassObject) will reside in.
+> * ```unsigned int width``` - Represents the width in pixels for the [Texture](#textureClassObject) in which the [Header](#headerClassObject) will reside in.
+> * ```unsigned int states``` - Represents the states for the [Texture](#textureClassObject) in which the [Header](#headerClassObject) will reside in.
 
 ##### <a name="pixelC">```pixel```</a> - Class containing all the necessary information of a pixel.
 > * ```pixel(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha)``` - Constructor to create a pixel with the specified red, green, blue, and alpha.
